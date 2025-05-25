@@ -1,3 +1,147 @@
 /* オリジナルCSS */
 /* Google font Icon */
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url(https://fonts.googleapis.com/earlyaccess/notosansjp.css);
+
+/* 共通設定 
+    カラーマスター  */
+
+:root {
+    --blue: #0067C5;
+    --gray: #EBEBEB;
+    --yellow: #FFB942;
+    --white: #ffffff;
+}
+
+/* 共通設定 */
+html {
+    font-family: "Noto Sans JP", sans-serif, FontAwesome;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 10px;
+}
+
+/* .sp{
+    display: none;
+} */
+
+body {
+    position: relative;
+}
+
+a {
+    display: inline-block;
+}
+
+.wrap {
+    width: 960px;
+    max-width: 100%;
+}
+
+.flex_bw {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.bg_blue {
+    background-color: var(--blue);
+    color: var(--white);
+
+}
+
+.bg_gray {
+    background-color: var(--gray);
+}
+
+.bs_yellow {
+    background-color: var(--yellow);
+    color: var(--white)
+}
+
+.left-area {
+    position: relative;
+    margin-left: 0;
+}
+
+.right-area {
+    position: relative;
+    margin-right: 0;
+}
+
+/* header */
+header {
+    position: sticky;
+    top: 0;
+    max-width: 100%;
+    background: var(--white);
+    padding: 1.5em 0 0;
+}
+
+header .flex_bw {
+    align-items: center;
+}
+
+header .flex_bw img {
+    max-width: 218px;
+    width: 100%;
+    height: auto;
+}
+
+h1 {
+    margin: 1em auto;
+}
+
+header .right-area {
+    text-align: right;
+}
+
+header .right-area .bg_blue {
+    display: block;
+    padding: .5em 3em;
+    text-align: center;
+    font-size: 1.25em;
+    letter-spacing: -.5px;
+}
+
+.right-area .contact-area::before {
+    content: '\f095';
+    position: absolute;
+    top: 1em;
+    left: 0px;
+    font-size: 4rem;
+    font-weight: normal;
+    transform: rotate(100deg);
+}
+
+p.tel {
+    font-size: 3em;
+    padding-left: 2.5em;
+}
+
+p.time {
+    font-size: 1.3em;
+    padding-left: 4em;
+}
+
+/* ヘッダーナビメニュー */
+nav {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    background-color: rgba(0, 0, 0, 0.31);
+
+}
+
+.nav-menu li:first-child {
+    margin-left: 0;
+}
+
+.nav-menu li:last-child {
+    margin-right: 0;
+}
+
+.nav-menu li {
+    font-size: 1.75em;
+    padding: .7rem 0;
+}
