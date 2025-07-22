@@ -1,0 +1,110 @@
+// scss上で利用するスタイル定義
+$main-color: #f3f3f3;
+$sub-color: #333333;
+$accent-color: #d8d6d6;
+$font-family: "Noto Serif JP", "游明朝", serif, "Material Icons";
+$font-size: 16px;
+$line-height: 1.6;
+
+/*! original styles */
+/*! 定数設定 */
+:root {
+  --font-size: #{$font-size};
+  --line-height: #{$line-height};
+  --font-family: #{$font-family};
+
+  --main-color: #{$main-color};
+  --sub-color: #{$sub-color};
+  --accent-color: #{$accent-color};
+}
+
+body {
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  font-family: var(--font-family);
+}
+
+/* 共通項目設定 */
+.more_btn {
+  display: inline-block;
+  padding: 0.5em 0.75em;
+  border: solid 1px var(--sub-color);
+  background-color: var(--accent-color);
+  text-align: right;
+  transition: all 0.3s ease;
+}
+
+.more_btn:visited {
+  background-color: var(--accent-color);
+  color: black;
+}
+
+.more_btn:hover {
+  background-color: var(--sub-color);
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+a {
+  display: inline-block;
+  color: var(--sub-color);
+  text-decoration: none;
+}
+
+/*! headerのスタイル設定 */
+header {
+  display: grid;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5em;
+
+  place-content: center;
+  place-items: center;
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em;
+  backdrop-filter: blur(5px);
+}
+
+h1.logo {
+  display: grid;
+
+  place-content: center;
+  place-items: center;
+  a {
+    display: contents;
+  }
+}
+.header_nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 1.5em;
+  .nav_box {
+    display: contents;
+    .nav_item {
+      display: inline-block;
+      padding: 0.5em;
+      text-align: center;
+
+      &:after {
+        display: block;
+        transform: scale(0, 1);
+        width: 100%;
+        height: 4px;
+        background-color: transparent;
+        text-align: center;
+        content: "";
+        transition: 0.5s ease;
+      }
+
+      &:hover:after {
+        transform: scale(1, 1);
+        background-color: var(--main-color);
+      }
+    }
+  }
+}
