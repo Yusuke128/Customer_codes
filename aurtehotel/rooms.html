@@ -19,8 +19,8 @@
     <!-- スマホのホームに追加したときのアイコン -->
     <link rel="apple-touch-icon" href="img/">
     <!-- CSS読み込み -->
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <!-- Google Font Icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -30,7 +30,7 @@
   <body>
     <header>
       <div class="header_logo">
-        <h1 class="logo"><a href="index.html"><img src="assets/img/png/logo.png" alt="ロゴ画像" width="59" height="58"></a><!-- .to_topPage end--></h1><!-- .logo end-->
+        <div class="logo"><a href="index.html"><img src="assets/img/png/logo.png" alt="ロゴ画像" width="59" height="58"></a><!-- .to_topPage end--></div><!-- .logo end-->
       </div><!-- .header_logo end-->
       <div class="humberger">
         <span class="hum_border"></span><!-- .hum_border end-->
@@ -49,8 +49,99 @@
       </nav><!-- .header_nav end-->
     </header>
     <main>
+      <section id="rooms" class="mv">
+        <h1 class="mv_ttl">お部屋一覧</h1><!-- .mv_ttl end-->
+        <picture class="mv_img">
+          <source srcset="assets/img/webp/main_visual.webp" type="image/webp">
+          <source srcset="assets/img/png/main_visual.png" type="image/png">
+          <img src="assets/img/webp/main_visual.webp" alt="トップ画像" width="1440" height="1080">
+        </picture>
+        <div class="sp_scroll"><span>&nbsp;</span></div><!-- .sp_scroll end-->
+      </section><!-- .mv end-->
+
+      </article><!-- .rooms_top end-->
+      <section class="rooms_archive">
+        <div class="cards">
+
+          <a href="room.html" class="card_box">
+            <h2 class="card_ttl">部屋名</h2><!-- .card_ttl end-->
+            <div class="card_img_box">
+              <img src="assets/img/png/card_img.png" alt="部屋の外観" class="card_img" width="300" height="200">
+            </div><!-- .card_img_box end-->
+            <div class="card_content">
+              <p>お部屋の簡単な紹介文が入ります</p>
+            </div><!-- .card_content end-->
+          </a><!-- .card_box end-->
+
+          <a href="room.html" class="card_box">
+            <h2 class="card_ttl">部屋名</h2><!-- .card_ttl end-->
+            <div class="card_img_box">
+              <img src="assets/img/png/card_img.png" alt="部屋の外観" class="card_img" width="300" height="200">
+            </div><!-- .card_img_box end-->
+            <div class="card_content">
+              <p>お部屋の簡単な紹介文が入ります</p>
+            </div><!-- .card_content end-->
+          </a><!-- .card_box end-->
+
+          <a href="room.html" class="card_box">
+            <h2 class="card_ttl">部屋名</h2><!-- .card_ttl end-->
+            <div class="card_img_box">
+              <img src="assets/img/png/card_img.png" alt="部屋の外観" class="card_img" width="300" height="200">
+            </div><!-- .card_img_box end-->
+            <div class="card_content">
+              <p>お部屋の簡単な紹介文が入ります</p>
+            </div><!-- .card_content end-->
+          </a><!-- .card_box end-->
+
+          <a href="room.html" class="card_box">
+            <h2 class="card_ttl">部屋名</h2><!-- .card_ttl end-->
+            <div class="card_img_box">
+              <img src="assets/img/png/card_img.png" alt="部屋の外観" class="card_img" width="300" height="200">
+            </div><!-- .card_img_box end-->
+            <div class="card_content">
+              <p>お部屋の簡単な紹介文が入ります</p>
+            </div><!-- .card_content end-->
+          </a><!-- .card_box end-->
+
+          <a href="room.html" class="card_box">
+            <h2 class="card_ttl">部屋名</h2><!-- .card_ttl end-->
+            <div class="card_img_box">
+              <img src="assets/img/png/card_img.png" alt="部屋の外観" class="card_img" width="300" height="200">
+            </div><!-- .card_img_box end-->
+            <div class="card_content">
+              <p>お部屋の簡単な紹介文が入ります</p>
+            </div><!-- .card_content end-->
+          </a><!-- .card_box end-->
+
+          <a href="room.html" class="card_box">
+            <h2 class="card_ttl">部屋名</h2><!-- .card_ttl end-->
+            <div class="card_img_box">
+              <img src="assets/img/png/card_img.png" alt="部屋の外観" class="card_img" width="300" height="200">
+            </div><!-- .card_img_box end-->
+            <div class="card_content">
+              <p>お部屋の簡単な紹介文が入ります</p>
+            </div><!-- .card_content end-->
+          </a><!-- .card_box end-->
+        </div><!-- .cards end-->
+      </section><!-- .rooms_archive end-->
+
+      <section class="reserve">
+        <div class="ttl_box">
+          <h2 class="section_ttl">予約</h2><!-- .section_ttl end-->
+          <p class="section_txt">各種旅行サイト,及び当ホームページからご予約できます</p><!-- .section_txt end-->
+        </div><!-- .ttl_box end-->
+        <div class="wrapper">
+          <ul class="reserve_list">
+            <li class="reserve_link"><a href="" class="reserve_btn">予約サイト1</a></li><!-- .reserve_link end-->
+            <li class="reserve_link"><a href="" class="reserve_btn">予約サイト2</a></li><!-- .reserve_link end-->
+            <li class="reserve_link"><a href="" class="reserve_btn">予約サイト3</a></li><!-- .reserve_link end-->
+            <li class="reserve_link"><a href="" class="reserve_btn">予約ページ</a></li><!-- .reserve_link end-->
+          </ul><!-- .reserve_list end-->
+        </div><!-- .wrapper end-->
+      </section><!-- .reserve end-->
 
     </main>
+
     <footer>
       <div class="footer_logo">
         <a href="index.html"><img src="assets/img/png/logo.png" alt="ロゴ画像" width="60" height="60"></a>
