@@ -6,7 +6,16 @@ $accent-color-secondary: #5b6ff3a5;
 $font-family: "Noto Serif JP", "游明朝", serif, "Material Icons";
 $font-size: 16px;
 $line-height: 1.5;
-
+$breakpoints: (
+  sp: "screen and (max-width: 767px)",
+  tab: "screen and (max-width: 1023px)",
+  pc: "screen and (min-width: 1024px)",
+);
+@mixin media($breakpoint) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
 /*! original styles */
 /*! 定数設定 */
 :root {
@@ -81,6 +90,23 @@ section:not(.mv) {
 .wrapper {
   width: 90%;
   max-width: 1440px;
+}
+/*!-- レスポンシブ  ハンバーガー実装*/
+.humberger {
+  @include media(sp) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    gap: 4px;
+    .hum_border {
+      display: inline-block;
+      width: 20px;
+      height: 4px;
+      background-color: var(--accent-color);
+    }
+  }
+  display: none;
 }
 
 /*! 共通項目ここまで */
@@ -268,6 +294,7 @@ h1.logo {
     gap: 2em;
     .reserve_link {
       .reserve_btn {
+        width: 100%;
         padding: 0.5em;
         background-color: var(--accent-color-secondary);
       }
@@ -283,5 +310,137 @@ footer {
   text-align: center;
   .footer_contact {
     margin-top: 1.5em;
+  }
+}
+
+/*!--レスポンシブ対応 */
+@include media(sp) {
+  .ttl_box {
+    .section_ttl {
+      font-size: 2em;
+    }
+    .section_txt {
+      font-size: 1em;
+    }
+  }
+  header {
+    padding-top: 0.5em;
+
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .header_nav {
+    flex-direction: column;
+    position: absolute;
+    right: -100%;
+  }
+  .mv {
+    height: 100dvh;
+    .sp_scroll {
+      position: absolute;
+      bottom: 1em;
+      left: 50%;
+      width: 2em;
+      height: 2em;
+      border: 1px solid var(--accent-color);
+      border-radius: 50%;
+      cursor: pointer;
+
+      translate: -50%;
+
+      &::before {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 2em;
+        height: 2em;
+        border-radius: 50%;
+        box-shadow: 0 0 0 0 gba(253, 102, 43, 0.8);
+        content: "";
+        animation: ripple 3s infinite;
+
+        translate: -50%;
+      }
+      span {
+        position: absolute;
+        top: 10%;
+        left: 25%;
+        z-index: 2;
+        transform: rotate(-45deg);
+        width: 1em;
+        height: 1em;
+        border-bottom: 1px solid var(--accent-color);
+        border-left: 1px solid var(--accent-color);
+      }
+      @keyframes ripple {
+        0% {
+          opacity: 0;
+        }
+
+        30% {
+          opacity: 1;
+        }
+
+        60% {
+          opacity: 0;
+          box-shadow: 0 0 0 2em rgba(253, 102, 43, 0.2);
+        }
+
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+    .mv_img {
+      height: 100%;
+      img {
+        width: auto;
+        height: 100%;
+
+        object-fit: cover;
+      }
+    }
+  }
+  .concept {
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    // background-image: url(../img/webp/concept.webp);
+    // background-position: center;
+    // background-size: cover;
+    .img_box {
+      // display: none;
+    }
+  }
+  .cards {
+    gap: 0.5em;
+    .card_box {
+      flex-basis: 48%;
+
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+  .top_faq {
+    .faq_box {
+      summary {
+        font-size: 1.2em;
+      }
+    }
+  }
+  .news {
+    .news_list {
+      font-size: 1em;
+    }
+  }
+  .reserve {
+    .reserve_list {
+      flex-wrap: wrap;
+      width: 100%;
+      .reserve_link {
+        width: 45%;
+      }
+    }
   }
 }
