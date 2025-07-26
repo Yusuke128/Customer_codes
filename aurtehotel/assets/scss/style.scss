@@ -8,7 +8,7 @@ $font-size: 16px;
 $line-height: 1.5;
 $breakpoints: (
   sp: "screen and (max-width: 767px)",
-  tab: "screen and (max-width: 1023px)",
+  tab: "screen and (min-width : 768px) and (max-width: 1023px)",
   pc: "screen and (min-width: 1024px)"
 );
 @mixin media($breakpoint) {
@@ -105,43 +105,47 @@ section:not(.mv) {
   max-width: 1440px;
 }
 /*!-- レスポンシブ  ハンバーガー実装*/
-.humberger {
-  @include media(tab) {
-    @include media(sp) {
-      & {
-        padding-top: 0.5em;
+//タブレット表示を軸としてmixinを利用する
+@mixin humberger-common {
+  display: block;
+  position: relative;
+  width: 2em;
+  height: 20px;
+  margin-right: 1em;
+  cursor: pointer;
 
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+  grid-template-columns: repeat(2, 1fr);
+}
+.hum_border {
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-color);
+  transition: all 0.5s ease;
+  &:first-child {
+    top: 0;
+    right: 1em;
+  }
+  &:nth-child(2) {
+    top: 45%;
+    right: 1em;
+  }
+  &:last-child {
+    right: 1em;
+    bottom: 0;
+  }
+}
+
+.humberger {
+  @include media(sp) {
     & {
-      display: block;
-      position: relative;
-      width: 2em;
-      height: 20px;
-      margin-right: 1em;
-      cursor: pointer;
-      .hum_border {
-        display: inline-block;
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        background-color: var(--accent-color);
-        transition: all 0.5s ease;
-        &:first-child {
-          top: 0;
-          right: 1em;
-        }
-        &:nth-child(2) {
-          top: 50%;
-          right: 1em;
-        }
-        &:last-child {
-          right: 1em;
-          bottom: 0;
-        }
-      }
+      @include humberger-common;
+      padding-top: 0.5em;
     }
+  }
+  @include media(tab) {
+    @include humberger-common;
   }
   display: none;
 }
@@ -228,28 +232,46 @@ header {
     margin-left: 1em;
   }
 }
+// tab,sp共通部分をmixin
+@mixin header_common {
+  width: 100dvw;
+  height: 0;
+  transition: height 0.5s ease;
+  transition-delay: 2s;
+
+  grid-area: 2 / 1 / 3 / 3;
+}
+@mixin navBox_common {
+  flex-direction: column;
+  // position: fixed;
+  // right: -100%;
+  width: 100%;
+  height: 0;
+
+  gap: 2em;
+}
+@mixin navItem_common {
+  transform: translateX(100%);
+  width: 100%;
+  transition: transform 0.8s ease;
+}
 .header_nav {
   @include media(tab) {
+    @include header_common;
+  }
+  @include media(sp) {
     & {
-      width: 100dvw;
-      height: 0;
-      transition: height 0.5s ease;
-      transition-delay: 2s;
-
-      grid-area: 2 / 1 / 3 / 3;
+      @include header_common;
     }
   }
   .nav_box {
     @include media(tab) {
       & {
-        flex-direction: column;
-        // position: fixed;
-        // right: -100%;
-        width: 100%;
-        height: 0;
-
-        gap: 2em;
+        @include navBox_common;
       }
+    }
+    @include media(sp) {
+      @include navBox_common;
     }
     display: flex;
     justify-content: space-between;
@@ -260,11 +282,10 @@ header {
     gap: 1.5em;
     .nav_item {
       @include media(tab) {
-        & {
-          transform: translateX(100%);
-          width: 100%;
-          transition: transform 0.8s ease;
-        }
+        @include navItem_common();
+      }
+      @include media(sp) {
+        @include navItem_common();
       }
       display: inline-block;
       padding: 0.5em;
@@ -518,7 +539,114 @@ footer {
     }
   }
 }
+/*! 部屋詳細(single-room) */
+.room_list {
+  @include media(sp) {
+    /*! 部屋詳細 */
+    & {
+      flex-wrap: wrap;
 
+      gap: 0.5em;
+    }
+  }
+  display: flex;
+  justify-content: center;
+  .list_item {
+    @include media(sp) {
+      & {
+        width: 100%;
+        color: var(--main-color);
+      }
+    }
+    flex-basis: 99%;
+    padding: 0.5em;
+    border: 1px solid var(--accent-color);
+    background-color: var(--accent-color-secondary);
+    text-align: center;
+    transition-property: box-shadow, background-color;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+    &:hover {
+      border-color: var(--sub-color);
+      background-color: var(--accent-color);
+      color: var(--sub-color);
+    }
+  }
+}
+.features {
+  margin-top: 2em;
+  .future {
+    @include media(sp) {
+      & {
+        padding: 1.5em 0;
+      }
+      .wrapper {
+        flex-direction: column;
+      }
+
+      .section_ttl {
+        text-align: center;
+      }
+    }
+    .wrapper {
+      @include media(sp) {
+        & {
+          flex-direction: column;
+        }
+      }
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 1.5em;
+    }
+    &:nth-child(2n) {
+      background-color: var(--sub-color);
+      color: var(--main-color);
+      .wrapper {
+        @include media(sp) {
+          & {
+            flex-direction: column;
+          }
+        }
+        flex-direction: row-reverse;
+      }
+    }
+    .txt_box {
+      flex-basis: 45%;
+      .section_ttl {
+        margin-bottom: 1.5em;
+      }
+    }
+    .img_box {
+      margin: 0;
+    }
+  }
+}
+.facilities_box {
+  @include media(tab) {
+    & {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @include media(sp) {
+    & {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  display: grid;
+  margin-top: 1.5em !important;
+
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: auto;
+  gap: 1.5em;
+  .facility_box {
+    width: 100%;
+    padding: 1.5em 1em;
+    border: solid 1px var(--sub-color);
+    text-align: center;
+  }
+}
 /*! FAQ */
 .faq {
   border-bottom: solid 1px var(--sub-color);
@@ -588,17 +716,17 @@ footer {
 }
 
 /*! 予約リンク */
+@mixin reserveList-common {
+  flex-wrap: wrap;
+  width: 100%;
+}
 .reserve {
   .reserve_list {
     @include media(tab) {
-      @include media(sp) {
-        & {
-          flex-wrap: wrap;
-        }
-      }
-      & {
-        width: 100%;
-      }
+      @include reserveList-common;
+    }
+    @include media(sp) {
+      @include reserveList-common;
     }
     display: flex;
     justify-content: center;
@@ -622,102 +750,6 @@ footer {
     }
   }
 }
-
-/*! 部屋詳細(single-room) */
-.room_list {
-  display: flex;
-  justify-content: center;
-  .list_item {
-    flex-basis: 99%;
-    padding: 0.5em;
-    border: 1px solid var(--accent-color);
-    background-color: var(--accent-color-secondary);
-    text-align: center;
-    transition-property: box-shadow, background-color;
-    transition-duration: 0.5s;
-    transition-timing-function: ease-in-out;
-    .room_link {
-      width: 100%;
-      color: var(--main-color);
-    }
-    &:hover {
-      border-color: var(--sub-color);
-      background-color: var(--accent-color);
-      color: var(--sub-color);
-    }
-  }
-}
-.features {
-  margin-top: 2em;
-  .future {
-    @include media(sp) {
-      & {
-        padding: 1.5em 0;
-      }
-      &:nth-child(2n) {
-        .wrapper {
-          flex-direction: column;
-        }
-      }
-      .section_ttl {
-        text-align: center;
-      }
-    }
-    .wrapper {
-      @include media(sp) {
-        & {
-          flex-direction: column;
-        }
-      }
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 1.5em;
-    }
-    &:nth-child(2n) {
-      background-color: var(--sub-color);
-      color: var(--main-color);
-      .wrapper {
-        flex-direction: row-reverse;
-      }
-    }
-    .txt_box {
-      flex-basis: 45%;
-      .section_ttl {
-        margin-bottom: 1.5em;
-      }
-    }
-    .img_box {
-      margin: 0;
-    }
-  }
-}
-.facilities_box {
-  @include media(tab) {
-    @include media(sp) {
-      & {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    & {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  display: grid;
-  margin-top: 1.5em !important;
-
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: auto;
-  gap: 1.5em;
-  .facility_box {
-    width: 100%;
-    padding: 1.5em 1em;
-    border: solid 1px var(--sub-color);
-    text-align: center;
-  }
-}
-
 /*! お問い合わせ,予約フォーム */
 form {
   text-align: center;
