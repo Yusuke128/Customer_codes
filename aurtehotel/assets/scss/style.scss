@@ -254,6 +254,7 @@ header {
 @mixin header_common {
   width: 100%;
   height: 0;
+  background-color: var(--main-color);
   transition: height 0.8s ease;
   transition-delay: 1.5s;
 
