@@ -1,3 +1,4 @@
 *.DS_Store
 *.map
 */LP_SS
+_*.min.css
