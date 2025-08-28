@@ -1,0 +1,942 @@
+// scss上で利用するスタイル定義
+@import "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Serif:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap";
+
+$main-color: #f3f3f3;
+$sub-color: #333;
+$accent-color: #e02121;
+$accent-color-secondary: #5b6ff3a5;
+$font-family: "Shippori Mincho", "Noto Sans JP", "Noto Serif JP", "游明朝", serif, "Material Icons";
+$font-size: 16px;
+$line-height: 1.5;
+$breakpoints: (
+  sp: "screen and (max-width: 767px)",
+  tab: "screen and (min-width : 768px) and (max-width: 1023px)",
+  pc: "screen and (min-width: 1024px)"
+);
+
+@mixin media($breakpoint) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+@mixin hidden_animation {
+  opacity: 0;
+  transform: translateY(50px);
+
+  // アニメーション
+  transition: opacity 0.8s ease, transform 0.8s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*! original styles */
+
+/*! 定数設定 */
+:root {
+  --font-size: #{$font-size};
+  --line-height: #{$line-height};
+  --font-family: #{$font-family};
+  --main-color: #{$main-color};
+  --sub-color: #{$sub-color};
+  --accent-color: #{$accent-color};
+  --accent-color-secondary: #{$accent-color-secondary};
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
+/*! 共通項目設定 */
+.no-scroll {
+  overflow: hidden;
+}
+
+/*! ボタンのスタイル */
+.more_link {
+  margin: 1.5em 0;
+  text-align: right;
+}
+
+a.more_btn {
+  display: inline-block;
+  padding: 0.5em 0.75em;
+  color: var(--sub-color);
+  text-align: right;
+  background-color: var(--accent-color);
+  border: solid 1px var(--sub-color);
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: var(--accent-color);
+    cursor: pointer;
+    background-color: var(--main-color);
+  }
+}
+
+a {
+  display: inline-block;
+  color: var(--sub-color);
+  text-decoration: none;
+
+  &:visited {
+    color: var(--sub-color);
+  }
+}
+
+/*! section毎の間隔の統一 */
+section:not(.mv) {
+  padding: 1.5em 0;
+  margin-top: 3em;
+}
+
+/*! 各セクション統一のスタイル */
+.ttl_box {
+  margin-bottom: 1.5em;
+  text-align: center;
+
+  .section_ttl {
+    margin: 1em 0;
+    font-size: 3em;
+    font-weight: bold;
+
+    @include media(sp) {
+      & {
+        font-size: 2em;
+      }
+    }
+
+    .section_txt {
+      width: 90%;
+      font-size: 1.2em;
+
+      @include media(sp) {
+        & {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}
+
+/*! コンテンツの最大幅 */
+.wrapper {
+  width: 90%;
+  max-width: 1440px;
+}
+
+/* !-- レスポンシブ  ハンバーガー実装 */
+// タブレット表示を軸としてmixinを利用する
+@mixin humberger-common {
+  position: relative;
+  display: block;
+  grid-template-columns: repeat(2, 1fr);
+  width: 2em;
+  height: 20px;
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+.hum_border {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-color);
+  transition: all 0.5s ease;
+
+  &:first-child {
+    top: 0;
+    right: 1em;
+  }
+
+  &:nth-child(2) {
+    top: 45%;
+    right: 1em;
+  }
+
+  &:last-child {
+    right: 1em;
+    bottom: 0;
+  }
+}
+
+.humberger {
+  display: none;
+
+  @include media(sp) {
+    & {
+      padding-top: 0.5em;
+
+      @include humberger-common;
+    }
+  }
+
+  @include media(tab) {
+    @include humberger-common;
+  }
+}
+
+// ハンバーガーメニュー展開動作
+.open {
+  .humberger {
+    z-index: 1;
+
+    .hum_border {
+      &:first-child {
+        top: 50%;
+        transform: rotate(-225deg);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:last-child {
+        top: 50%;
+        transform: rotate(225deg);
+      }
+    }
+  }
+
+  .header_nav {
+    height: 100dvh;
+    transition-delay: 0s;
+
+    .nav_box {
+      right: 0;
+      margin: 0;
+
+      .nav_item {
+        width: 100%;
+        transform: translateX(0);
+
+        .nav_link {
+          width: 100%;
+        }
+
+        &:nth-child(1) {
+          transition-delay: 1.2s;
+        }
+
+        &:nth-child(2) {
+          transition-delay: 1.4s;
+        }
+
+        &:nth-child(3) {
+          transition-delay: 1.6s;
+        }
+
+        &:nth-child(4) {
+          transition-delay: 1.8s;
+        }
+
+        &:nth-child(5) {
+          transition-delay: 2s;
+        }
+      }
+    }
+  }
+}
+
+/*! 共通項目ここまで */
+
+/*! headerのスタイル設定 */
+header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5em;
+  align-items: center;
+  width: 100%;
+  max-width: 1440px;
+  padding: 2em 0 1em;
+  backdrop-filter: blur(5px);
+  translate: -50% 0;
+
+  @include media(tab) {
+    & {
+      grid-template-columns: 1fr auto;
+      gap: 0;
+      padding: 0.5em 0;
+    }
+  }
+
+  @include media(sp) {
+    & {
+      gap: 0;
+      padding: 0.5em 0;
+    }
+  }
+
+  .header_logo {
+    margin-left: 1em;
+  }
+}
+
+// tab,sp共通部分をmixin
+@mixin header_common {
+  grid-area: 2 / 1 / 3 / 3;
+  width: 100%;
+  height: 0;
+  background-color: var(--main-color);
+  transition: height 0.8s ease;
+  transition-delay: 1.5s;
+}
+
+@mixin navBox_common {
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  // position: fixed;
+  // right: -100%;
+  width: 100%;
+  height: 80%;
+}
+
+@mixin navItem_common {
+  width: 100%;
+  transform: translateX(100%);
+  transition: transform 0.8s ease;
+}
+
+.header_nav {
+  @include media(tab) {
+    @include header_common;
+  }
+
+  @include media(sp) {
+    & {
+      @include header_common;
+    }
+  }
+
+  .nav_box {
+    display: flex;
+    gap: 1.5em;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 1em;
+    transition: 0.5s;
+
+    @include media(tab) {
+      & {
+        @include navBox_common;
+      }
+    }
+
+    @include media(sp) {
+      @include navBox_common;
+    }
+
+    .nav_item {
+      display: inline-block;
+      padding: 0.5em;
+      text-align: center;
+
+      @include media(tab) {
+        @include navItem_common;
+      }
+
+      @include media(sp) {
+        @include navItem_common;
+      }
+
+      &::after {
+        display: block;
+        width: 100%;
+        height: 4px;
+        text-align: center;
+        content: "";
+        background-color: transparent;
+        transform: scale(0, 1);
+        transition: 0.5s ease;
+      }
+
+      &:hover::after {
+        background-color: var(--main-color);
+        transform: scale(1, 1);
+      }
+
+      &:nth-child(1) {
+        transition-delay: 1.3s;
+      }
+
+      &:nth-child(2) {
+        transition-delay: 1.1s;
+      }
+
+      &:nth-child(3) {
+        transition-delay: 0.9s;
+      }
+
+      &:nth-child(4) {
+        transition-delay: 0.7s;
+      }
+
+      &:nth-child(5) {
+        transition-delay: 0.5s;
+      }
+    }
+  }
+}
+
+/*! footer */
+footer {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-top: 3em;
+  text-align: center;
+  background-color: var(--accent-color-secondary);
+
+  .footer_contact {
+    margin-top: 1.5em;
+  }
+}
+
+/*! Main Visual */
+.mv {
+  position: relative;
+
+  @include media(sp) {
+    & {
+      height: 100dvh;
+
+      .sp_scroll {
+        position: absolute;
+        bottom: 1em;
+        left: 50%;
+        width: 2em;
+        height: 2em;
+        cursor: pointer;
+        border: 1px solid var(--accent-color);
+        border-radius: 50%;
+        translate: -50%;
+
+        &::before {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 2em;
+          height: 2em;
+          content: "";
+          border-radius: 50%;
+          box-shadow: 0 0 0 0 rgb(253 102 43 / 80%);
+          opacity: 0;
+          translate: -50%;
+          animation: ripple 3s infinite;
+        }
+
+        span {
+          position: absolute;
+          top: 10%;
+          left: 25%;
+          z-index: 2;
+          width: 1em;
+          height: 1em;
+          border-bottom: 1px solid var(--accent-color);
+          border-left: 1px solid var(--accent-color);
+          transform: rotate(-45deg);
+        }
+
+        @keyframes ripple {
+          0% {
+            opacity: 0;
+          }
+
+          30% {
+            opacity: 1;
+          }
+
+          60% {
+            box-shadow: 0 0 0 2em rgb(253 102 43 / 20%);
+            opacity: 0;
+          }
+
+          100% {
+            opacity: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .mv_ttl {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: var(--main-color);
+    translate: -50% -50%;
+  }
+
+  .mv_img {
+    @include media(sp) {
+      & {
+        height: 100%;
+      }
+    }
+
+    img {
+      vertical-align: bottom;
+
+      @include media(sp) {
+        & {
+          width: auto;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
+/*! Concept */
+.concept {
+  display: flex;
+  gap: 1.5em;
+  align-items: stretch;
+  justify-content: space-between;
+  max-width: 1440px;
+
+  @include media(sp) {
+    & {
+      position: relative;
+      flex-direction: column;
+      overflow: hidden;
+
+      // background-image: url(../img/webp/concept.webp);
+      // background-position: center;
+      // background-size: cover;
+    }
+  }
+
+  .ttl_box {
+    flex-basis: 65%;
+
+    .section_txt {
+      text-align: left;
+    }
+  }
+
+  .img_box {
+    height: 100%;
+    overflow: hidden;
+
+    @include media(sp) {
+      & {
+        // display:none;
+      }
+    }
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+/*! Rooms 
+    Card Style */
+.top_rooms {
+  background-color: #d9d9d9;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  align-items: stretch;
+  justify-content: space-between;
+  text-align: center;
+
+  @include media(sp) {
+    & {
+      gap: 0.5em;
+    }
+  }
+
+  .card_box {
+    display: flex;
+    flex-basis: 30%;
+    flex-direction: column;
+    overflow: hidden;
+    border: solid 1px var(--accent-color);
+    border-radius: 40px;
+
+    @include media(sp) {
+      & {
+        flex-basis: 48%;
+      }
+    }
+
+    @include hidden_animation;
+
+    .card_ttl {
+      width: 100%;
+      padding: 1em;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: var(--main-color);
+      background-color: var(--sub-color);
+    }
+
+    .card_img_box {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      .card_img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+
+      .card_img {
+        transform: scale(1.2);
+      }
+    }
+
+    .card_content {
+      margin: 0.5em;
+    }
+  }
+}
+
+@include media(sp) {
+  /*! 部屋詳細 */
+  .room_list {
+    flex-wrap: wrap;
+    gap: 0.5em;
+
+    .list_item {
+      flex-basis: 45%;
+    }
+  }
+}
+
+/*! 部屋詳細(single-room) */
+.room_list {
+  display: flex;
+  justify-content: center;
+
+  @include media(sp) {
+    /*! 部屋詳細 */
+    & {
+      flex-wrap: wrap;
+      gap: 0.5em;
+    }
+  }
+
+  .list_item {
+    flex-basis: 99%;
+    padding: 0.5em;
+    text-align: center;
+    background-color: var(--accent-color-secondary);
+    border: 1px solid var(--accent-color);
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.5s;
+    transition-property: box-shadow, background-color;
+
+    @include media(sp) {
+      & {
+        width: 100%;
+        color: var(--main-color);
+      }
+    }
+
+    &:hover {
+      color: var(--sub-color);
+      background-color: var(--accent-color);
+      border-color: var(--sub-color);
+    }
+  }
+}
+
+.features {
+  margin-top: 2em;
+
+  .future {
+    @include media(sp) {
+      & {
+        padding: 1.5em 0;
+      }
+
+      .wrapper {
+        flex-direction: column;
+      }
+
+      .section_ttl {
+        text-align: center;
+      }
+    }
+
+    @include hidden_animation;
+
+    .wrapper {
+      display: flex;
+      gap: 1.5em;
+      align-items: center;
+      justify-content: space-between;
+
+      @include media(sp) {
+        & {
+          flex-direction: column;
+        }
+      }
+    }
+
+    &:nth-child(2n) {
+      color: var(--main-color);
+      background-color: var(--sub-color);
+
+      .wrapper {
+        flex-direction: row-reverse;
+
+        @include media(sp) {
+          & {
+            flex-direction: column;
+          }
+        }
+      }
+    }
+
+    .txt_box {
+      flex-basis: 45%;
+
+      .section_ttl {
+        margin-bottom: 1.5em;
+      }
+    }
+
+    .img_box {
+      margin: 0;
+    }
+  }
+}
+
+.facilities_box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: auto;
+  gap: 1.5em;
+  margin-top: 1.5em !important;
+
+  @include media(tab) {
+    & {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @include media(sp) {
+    & {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .facility_box {
+    width: 100%;
+    padding: 1.5em 1em;
+    text-align: center;
+    border: solid 1px var(--sub-color);
+  }
+}
+
+/*! FAQ */
+.faq {
+  border-bottom: solid 1px var(--sub-color);
+
+  .faq_box {
+    margin: 1em 0;
+
+    summary {
+      font-size: 1.5em;
+      text-decoration: underline;
+
+      @include media(sp) {
+        & {
+          font-size: 1.2em;
+        }
+      }
+    }
+
+    .detail_content {
+      width: 80%;
+      margin: 1.2em auto;
+    }
+
+    &[open] .detail_content {
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0; /* 透明 */
+        transform: translateY(-10px); /* 上から表示 */
+      }
+
+      100% {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+}
+
+/* !News */
+.news {
+  border-bottom: solid 1px var(--sub-color);
+
+  .news_list {
+    font-size: 1.5em;
+    text-align: center;
+
+    @include media(sp) {
+      & {
+        font-size: 1em;
+      }
+    }
+
+    .news_item {
+      margin-bottom: 0.5em;
+
+      .news_link {
+        border-bottom: 1px solid #000;
+      }
+
+      .news_link:visited {
+        color: transparent;
+      }
+
+      .date {
+        margin-right: 1.5em;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+/*! NEWS詳細 */
+.news_content {
+  margin-bottom: 2em;
+}
+
+/*! 予約リンク */
+@mixin reserveList-common {
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.reserve {
+  .reserve_list {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    text-align: center;
+
+    @include media(tab) {
+      @include reserveList-common;
+    }
+
+    @include media(sp) {
+      @include reserveList-common;
+    }
+
+    .reserve_link {
+      @include media(sp) {
+        & {
+          width: 45%;
+        }
+      }
+
+      .reserve_btn {
+        width: 100%;
+        padding: 0.5em;
+        background-color: var(--accent-color-secondary);
+      }
+    }
+  }
+}
+
+/*! お問い合わせ,予約フォーム */
+form {
+  text-align: center;
+
+  .form_box {
+    position: relative;
+    margin-bottom: 2.5em;
+    vertical-align: middle;
+
+    .wpcf7-form-control-wrap {
+      display: contents;
+    }
+
+    .input_box {
+      width: 100%;
+      padding: 0.5em;
+      border: solid 1px var(--accent-color);
+      border-radius: 5px;
+      transition: border-color 0.5s ease;
+
+      &::placeholder {
+        color: transparent;
+      }
+
+      &:focus {
+        outline: none; // safariでの挙動設定
+        border-color: var(--sub-color) !important;
+      }
+
+      &:not(:placeholder-shown) {
+        border-color: var(--sub-color);
+      }
+    }
+
+    &:has(.input_box:focus) .form_ttl,
+    &:has(.input_box:not(:placeholder-shown)) .form_ttl {
+      top: -1.5em;
+      color: var(--sub-color);
+    }
+
+    .form_ttl {
+      position: absolute;
+      top: 0.8em;
+      left: 0.9em;
+      display: block;
+      color: var(--accent-color);
+      transition-timing-function: ease;
+      transition-duration: 0.5s;
+      transition-property: color, top;
+    }
+  }
+
+  .submit_btn {
+    padding: 0.5em 1em;
+    margin: 0 1em;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    transition-timing-function: ease;
+    transition-duration: 0.5s;
+    transition-property: color, background-color, border-color;
+
+    &:hover {
+      color: var(--main-color);
+      background-color: var(--accent-color);
+    }
+  }
+}

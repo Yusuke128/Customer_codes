@@ -1,0 +1,389 @@
+// ==================================================================
+// 共通部分を使えるように設定
+// ==================================================================
+@use "base" as b;
+@use "sass:color";
+
+// ================================================
+// Pages: 各セクション(ページ)ごとのレイアウトとスタイル
+// ================================================
+
+// Main Visual
+.p-mv {
+  position: relative;
+  overflow: hidden; // はみ出しを隠す
+
+  @include b.mq(sp) {
+    height: 100dvh;
+  }
+
+  &__title {
+    font-size: 3em;
+    color: var(--color-primary);
+    text-align: center;
+    white-space: nowrap; // タイトルが改行されないように
+
+    @include b.absolute-center; // mixinを使用
+
+    @include b.mq(sp) {
+      font-size: 2em;
+    }
+  }
+
+  &__img-box {
+    @include b.mq(sp) {
+      height: 100%;
+    }
+
+    img {
+      @include b.mq(sp) {
+        width: auto;
+        height: 100%;
+        object-fit: cover;
+        object-position: center; // 画像の表示位置を調整
+      }
+    }
+  }
+
+  &__scroll-indicator {
+    @include b.mq(sp) {
+      position: absolute;
+      bottom: 1em;
+      left: 50%;
+      width: 2em;
+      height: 2em;
+      cursor: pointer;
+      border: 1px solid var(--color-accent-primary);
+      border-radius: 50%;
+      transform: translateX(-50%);
+
+      &::before {
+        width: 2em;
+        height: 2em;
+        content: "";
+        border-radius: 50%;
+        box-shadow: 0 0 0 0 rgb(253 102 43 / 80%);
+        opacity: 0;
+        animation: ripple 3s infinite;
+
+        @include b.absolute-center; // mixinを使用
+      }
+
+      span {
+        position: absolute;
+        top: 10%;
+        left: 25%;
+        z-index: 2;
+        width: 1em;
+        height: 1em;
+        border-bottom: 1px solid var(--color-accent-primary);
+        border-left: 1px solid var(--color-accent-primary);
+        transform: rotate(-45deg);
+      }
+
+      @keyframes ripple {
+        0% {
+          opacity: 0;
+        }
+
+        30% {
+          opacity: 1;
+        }
+
+        60% {
+          box-shadow: 0 0 0 2em rgb(253 102 43 / 20%);
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
+
+// Concept
+.p-concept {
+  gap: 1.5em;
+  max-width: 1440px;
+
+  @include b.flex(space-between, stretch); // flex mixinを使用
+
+  @include b.mq(sp) {
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  &__text-box {
+    flex-basis: 65%;
+
+    .c-section__text {
+      text-align: left;
+    }
+  }
+
+  &__img-box {
+    height: 100%;
+    overflow: hidden;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+// Rooms (トップページ)
+.p-top-rooms {
+  background-color: #d9d9d9;
+
+  .l-wrapper {
+    flex-wrap: wrap;
+    gap: 1.5em;
+    text-align: center;
+
+    @include b.flex(space-between, stretch); // flex mixinを使用
+
+    @include b.mq(sp) {
+      gap: 0.5em;
+    }
+
+    .c-card {
+      flex-basis: calc(33.333% - 1em); // gapを考慮した幅
+
+      @include b.mq(sp) {
+        flex-basis: calc(50% - 0.25em); // SPでの幅
+      }
+    }
+  }
+}
+
+// Rooms (詳細ページ)
+.p-room-list {
+  flex-wrap: wrap;
+  gap: 1.5em; // 間隔を調整
+
+  @include b.flex(center, flex-start); // flex mixinを使用
+
+  @include b.mq(sp) {
+    gap: 0.5em;
+  }
+
+  &__item {
+    flex-basis: 99%; // ほとんど100%
+    padding: 0.5em;
+    text-align: center;
+    background-color: var(--color-accent-secondary);
+    border: 1px solid var(--color-accent-primary);
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.5s;
+    transition-property: box-shadow, background-color, color, border-color; // 全てのプロパティに適用
+
+    @include b.mq(sp) {
+      color: var(--color-primary);
+    }
+
+    &:hover {
+      color: var(--color-secondary);
+      background-color: var(--color-accent-primary);
+      border-color: var(--color-secondary);
+    }
+  }
+}
+
+// Features
+.p-features {
+  margin-top: 2em;
+
+  .p-feature-item {
+    padding: 1.5em 0;
+
+    @include b.fade-in-animation;
+
+    .l-wrapper {
+      gap: 1.5em;
+
+      @include b.flex(space-between, center); // flex mixinを使用
+
+      @include b.mq(sp) {
+        flex-direction: column;
+      }
+    }
+
+    &:nth-child(2n) {
+      color: var(--color-primary);
+      background-color: var(--color-secondary);
+
+      .l-wrapper {
+        flex-direction: row-reverse; // 偶数番目の項目は画像を右に
+
+        @include b.mq(sp) {
+          flex-direction: column; // SPでは上から順に
+        }
+      }
+    }
+
+    &__text-box {
+      flex-basis: 45%;
+
+      .c-section__title {
+        margin-bottom: 1.5em;
+        text-align: left;
+      }
+    }
+
+    &__img-box {
+      flex-basis: 45%; // 画像ボックスの幅も指定
+      margin: 0;
+    }
+  }
+}
+
+// Facilities
+.p-facilities {
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: auto;
+    gap: 1.5em;
+    margin-top: 1.5em;
+
+    @include b.mq(tab) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include b.mq(sp) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__item {
+    width: 100%;
+    padding: 1.5em 1em;
+    text-align: center;
+    background-color: var(--color-primary); // 背景色を追加
+    border: solid 1px var(--color-secondary);
+  }
+}
+
+// FAQ
+.p-faq {
+  border-bottom: solid 1px var(--color-secondary);
+
+  &__item {
+    margin: 1em 0;
+  }
+
+  &__summary {
+    font-size: 1.5em;
+    text-decoration: underline;
+    cursor: pointer; // カーソルをポインターに
+
+    @include b.mq(sp) {
+      font-size: 1.2em;
+    }
+  }
+
+  &__detail-content {
+    width: 80%;
+    margin: 1.2em auto;
+  }
+
+  &__item[open] &__detail-content {
+    animation: fadein 0.5s ease;
+  }
+
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+// News
+.p-news {
+  border-bottom: solid 1px var(--color-secondary);
+
+  &__list {
+    font-size: 1.5em;
+    text-align: center;
+
+    @include b.mq(sp) {
+      font-size: 1em;
+    }
+  }
+
+  &__item {
+    margin-bottom: 0.5em;
+  }
+
+  &__link {
+    border-bottom: 1px solid var(--color-secondary);
+
+    &:visited {
+      color: inherit; // 訪問済みリンクの色を親から継承
+    }
+  }
+
+  &__date {
+    margin-right: 1.5em;
+    font-style: italic;
+  }
+}
+
+// News Detail
+.p-news-detail {
+  margin-bottom: 2em;
+}
+
+// Reserve
+.p-reserve {
+  &__list {
+    gap: 2em;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+
+    @include b.flex(center, center); // flex mixinを使用
+
+    @include b.mq(tab) {
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    @include b.mq(sp) {
+      flex-wrap: wrap;
+      width: 100%;
+    }
+  }
+
+  &__item {
+    flex-basis: auto; // 個別の幅指定
+
+    @include b.mq(sp) {
+      flex-basis: 45%;
+      width: 45%;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    padding: 0.5em;
+    color: var(--color-primary); // ボタンの文字色
+    background-color: var(--color-accent-secondary);
+    border-radius: 5px; // 角丸を追加
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: color.adjust(b.$color-accent-primary, $lightness: -10%); // ホバー時の色
+    }
+  }
+}
