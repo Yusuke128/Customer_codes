@@ -1,61 +1,34 @@
-// ================================================
-// Variables & Mixins: SCSSで使う変数と共通ミックスインの定義
-// ================================================
 @use "sass:map";
 
-// フォント
+// ================================================
+// Base: 変数、Mixin、基本的なスタイル
+// ================================================
+
+// Google Fonts
 @import "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Serif:ital,wdth,wght@0,62.5..100,100..900&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap";
 
-// ブレークポイント
+/*! 変数設定 */
+$main-color: #f3f3f3;
+$sub-color: #333;
+$accent-color: #e02121;
+$accent-color-secondary: #5b6ff3a5;
+$font-family: "Shippori Mincho", "Noto Sans JP", "Noto Serif JP", "游明朝", serif, "Material Icons";
+$font-size: 16px;
+$line-height: 1.5;
 $breakpoints: (
   sp: "screen and (max-width: 767px)",
   tab: "screen and (min-width : 768px) and (max-width: 1023px)",
-  pc: "screen and (min-width: 1024px)",
-  mobile: "screen and (max-width:1023px)" // spとtabを合わせた範囲
+  pc: "screen and (min-width: 1024px)"
 );
 
-// カラー
-$color-primary: #f3f3f3;
-$color-secondary: #0c0c0c; // ベースカラーから変更
-$color-accent-primary: #e02121; // 赤系のアクセントカラー
-$color-accent-secondary: #5b6ff3a5; // 青系のアクセントカラー
-
-// フォント設定
-$font-family-base: "Shippori Mincho", "Noto Sans JP", "Noto Serif JP", "游明朝", serif, "Material Icons";
-$font-size-base: 16px;
-$line-height-base: 1.5;
-
-// ================================================
-// Mixins: 共通スタイル_プロパティの使い回し
-// ================================================
-
-/// レスポンシブ対応Mixin
-/// @param {String} $breakpoint - ブレークポイントのキー (sp, tab, pc, mobile)
-@mixin mq($breakpoint) {
+/*! Mixin設定 */
+@mixin media($breakpoint) {
   @media #{map.get($breakpoints, $breakpoint)} {
     @content;
   }
 }
 
-/// FlexboxレイアウトMixin
-/// @param {String} $justify-content - justify-contentプロパティの値 (デフォルト: space-between)
-/// @param {String} $align-items - align-itemsプロパティの値 (デフォルト: center)
-@mixin flex($justify-content: space-between, $align-items: center) {
-  display: flex;
-  align-items: $align-items;
-  justify-content: $justify-content;
-}
-
-/// 絶対指定で上下左右中央配置Mixin
-@mixin absolute-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/// フェードインアニメーションMixin
-@mixin fade-in-animation {
+@mixin hidden_animation {
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -66,303 +39,73 @@ $line-height-base: 1.5;
   }
 }
 
-// ================================================
-// Reset & Base: 全体に影響するスタイルとリセットCSS
-// ================================================
-
-html {
-  box-sizing: border-box;
-  word-break: normal;
-  text-size-adjust: 100%;
-  tab-size: 4;
+// tab,sp共通部分
+@mixin header_common {
+  grid-area: 2 / 1 / 3 / 3;
+  width: 100%;
+  height: 0;
+  background-color: var(--main-color);
+  transition: height 0.8s ease;
+  transition-delay: 1.5s;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-  padding: 0;
-  margin: 0;
-  background-repeat: no-repeat;
+// tab,sp共通部分
+@mixin navBox_common {
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 80%;
 }
 
-:focus {
-  outline: none;
-  outline-offset: 0;
+// tab,sp共通部分
+@mixin navItem_common {
+  width: 100%;
+  transform: translateX(100%);
+  transition: transform 0.8s ease;
 }
 
+// ==================================================================
+// ハンバーガーメニュ-
+// ==================================================================
+@mixin humberger-common {
+  position: relative;
+  display: block;
+  grid-template-columns: repeat(2, 1fr);
+  width: 2em;
+  height: 20px;
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+/*! 定数設定 (CSSカスタムプロパティ) */
+:root {
+  --font-size: #{$font-size};
+  --line-height: #{$line-height};
+  --font-family: #{$font-family};
+  --main-color: #{$main-color};
+  --sub-color: #{$sub-color};
+  --accent-color: #{$accent-color};
+  --accent-color-secondary: #{$accent-color-secondary};
+}
+
+/*! 基本スタイル */
 body {
   font-family: var(--font-family);
   font-size: var(--font-size);
   line-height: var(--line-height);
-  color: var(--color-secondary); // bodyのデフォルトテキストカラー
-}
-
-// カラー変数の定義 (CSSカスタムプロパティ)
-:root {
-  --color-primary: #{$color-primary};
-  --color-secondary: #{$color-secondary};
-  --color-accent-primary: #{$color-accent-primary};
-  --color-accent-secondary: #{$color-accent-secondary};
-  --font-family: #{$font-family-base};
-  --font-size: #{$font-size-base};
-  --line-height: #{$line-height-base};
-
-  @include mq(sp) {
-    font-size: 10px; // SPでのフォントサイズ調整
-    line-height: 1;
-  }
-}
-
-hr {
-  height: 0;
-  overflow: visible;
-  color: inherit;
-}
-
-details,
-main {
-  display: block;
-}
-
-summary {
-  display: list-item;
-}
-
-small {
-  font-size: 80%;
-}
-
-[hidden] {
-  display: none;
-}
-
-abbr[title] {
-  text-decoration: underline dotted;
-  border-bottom: none;
 }
 
 a {
-  color: inherit;
+  display: inline-block;
+  color: var(--sub-color);
   text-decoration: none;
-  background-color: transparent;
-
-  &:active,
-  &:hover {
-    outline-width: 0;
-  }
 
   &:visited {
-    color: inherit;
+    color: var(--sub-color);
   }
 }
 
-code,
-kbd,
-pre,
-samp {
-  font-family: monospace;
-}
-
-pre {
-  font-size: 1em;
-}
-
-b,
-strong {
-  font-weight: bolder;
-}
-
-sub,
-sup {
-  position: relative;
-  font-size: 75%;
-  line-height: 0;
-  vertical-align: baseline;
-}
-
-sub {
-  bottom: -0.25em;
-}
-
-sup {
-  top: -0.5em;
-}
-
-table {
-  text-indent: 0;
-  border-color: inherit;
-}
-
-iframe {
-  border-style: none;
-}
-
-input {
-  border-radius: 0;
-}
-
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-
-[type="search"] {
-  appearance: textfield;
-  outline-offset: -2px;
-}
-
-[type="search"]::-webkit-search-decoration {
-  appearance: none;
-}
-
-textarea {
-  overflow: auto;
-  resize: vertical;
-}
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  font: inherit;
-  background-color: transparent;
-  border-style: none;
-}
-
-optgroup {
-  font-weight: 700;
-}
-
-button {
-  overflow: visible;
-}
-
-button,
-select {
-  text-transform: none;
-}
-
-[role="button"],
-[type="button"],
-[type="reset"],
-[type="submit"],
-button {
-  appearance: auto; // For consistency
-  cursor: pointer;
-
-  &::-moz-focus-inner {
-    padding: 0;
-    border-style: none;
-  }
-
-  &:-moz-focusring {
-    outline: 1px dotted ButtonText;
-  }
-}
-
-select {
-  appearance: none;
-
-  &::-ms-expand {
-    display: none;
-  }
-
-  &::-ms-value {
-    color: currentcolor;
-  }
-}
-
-legend {
-  display: table;
-  max-width: 100%;
-  color: inherit;
-  white-space: normal;
-  border: 0;
-}
-
-::-webkit-file-upload-button {
-  font: inherit;
-  color: inherit;
-  appearance: auto;
-}
-
-[disabled] {
-  cursor: default;
-}
-
-img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  vertical-align: bottom; // 不要な下部の余白を削除
-  border-style: none;
-}
-
-progress {
-  vertical-align: baseline;
-}
-
-[aria-busy="true"] {
-  cursor: progress;
-}
-
-[aria-controls] {
-  cursor: pointer;
-}
-
-[aria-disabled="true"] {
-  cursor: default;
-}
-
-ul,
-ol,
-dl {
-  list-style: none;
-}
-
-// ハンバーガーオープン時のスクロール制御
-.is-no-scroll {
+/*! ユーティリティ */
+.no-scroll {
   overflow: hidden;
-}
-
-// コンテンツの最大幅
-.l-wrapper {
-  width: 90%;
-  max-width: 1440px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-// 各セクション統一のスタイル
-.c-section {
-  padding: 1.5em 0;
-  margin-top: 3em;
-
-  &__title-box {
-    margin-bottom: 1.5em;
-    text-align: center;
-  }
-
-  &__title {
-    margin: 1em 0;
-    font-size: 3em;
-    font-weight: bold;
-
-    @include mq(sp) {
-      font-size: 2em;
-    }
-  }
-
-  &__text {
-    width: 90%;
-    margin-right: auto;
-    margin-left: auto;
-    font-size: 1.2em;
-
-    @include mq(sp) {
-      font-size: 1em;
-    }
-  }
 }

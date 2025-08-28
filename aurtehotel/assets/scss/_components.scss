@@ -4,171 +4,165 @@
 @use "base" as b;
 
 // ================================================
-// Components: 共通スタイル(クラスベース)
+// Components: ボタン、フォーム、カードなど
 // ================================================
 
-// ボタン
-.c-btn {
+/*! ボタンのスタイル */
+.more_link {
+  margin: 1.5em 0;
+  text-align: right;
+}
+
+a.more_btn {
   display: inline-block;
-  padding: 0.5em 1em;
-  font-size: 1rem;
+  padding: 0.5em 0.75em;
+  color: var(--sub-color);
+  text-align: right;
+  background-color: var(--accent-color);
+  border: solid 1px var(--sub-color);
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: var(--accent-color);
+    cursor: pointer;
+    background-color: var(--main-color);
+  }
+}
+
+/*! 各セクション統一のタイトルスタイル */
+.ttl_box {
+  margin-bottom: 1.5em;
   text-align: center;
-  border: 1px solid transparent; // デフォルトで透過
-  border-radius: 4px;
-  transition: 0.5s ease;
 
-  &--primary {
-    color: var(--color-primary);
-    background-color: var(--color-accent-primary);
+  .section_ttl {
+    margin: 1em 0;
+    font-size: 3em;
+    font-weight: bold;
 
-    &:hover {
-      color: var(--color-accent-primary);
-      background-color: var(--color-primary);
-      border-color: var(--color-accent-primary);
+    @include b.media(sp) {
+      font-size: 2em;
     }
-  }
 
-  &--secondary {
-    color: var(--color-secondary);
-    background-color: var(--color-accent-secondary);
+    .section_txt {
+      width: 90%;
+      font-size: 1.2em;
 
-    &:hover {
-      color: var(--color-accent-secondary);
-      background-color: var(--color-secondary);
-      border-color: var(--color-accent-secondary);
-    }
-  }
-
-  &--more {
-    // more_btnを統合
-    color: var(--color-secondary);
-    background-color: var(--color-accent-primary);
-    border: solid 1px var(--color-secondary);
-    transition: all 0.3s ease;
-
-    &:hover {
-      color: var(--color-accent-primary);
-      cursor: pointer;
-      background-color: var(--color-primary);
+      @include b.media(sp) {
+        font-size: 1em;
+      }
     }
   }
 }
 
-// Form
-.c-form {
-  &__group {
-    position: relative;
-    margin-bottom: 1.5em; // 間隔を調整
-    vertical-align: middle;
+/*! カードスタイル */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  align-items: stretch;
+  justify-content: space-between;
+  padding-bottom: 3rem;
+  text-align: center;
+
+  @include b.media(sp) {
+    gap: 0.5em;
+  }
+}
+
+.card_box {
+  display: flex;
+  flex-basis: 23%;
+  flex-direction: column;
+  overflow: hidden;
+  border: solid 1px var(--accent-color);
+  border-radius: 40px;
+
+  @include b.hidden_animation;
+
+  @include b.media(sp) {
+    flex-basis: 48%;
   }
 
-  &__label {
-    position: absolute;
-    top: 0.8em;
-    left: 0.9em;
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--color-accent-primary);
-    pointer-events: none; // ラベルの下のinputにイベントが伝わるように
-    transition-timing-function: ease;
-    transition-duration: 0.5s;
-    transition-property: color, top;
-  }
-
-  &__input,
-  &__textarea {
+  .card_ttl {
     width: 100%;
-    padding: 0.5em;
-    font-size: 1rem; // フォントサイズを統一
-    border: 1px solid var(--color-accent-primary); // デフォルトのボーダー色
-    border-radius: 5px;
-    transition: border-color 0.5s ease;
+    padding: 1em;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--main-color);
+    background-color: var(--sub-color);
+  }
 
-    &::placeholder {
-      color: transparent; // ラベルを優先するため
-    }
+  .card_img_box {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 
-    &:focus {
-      outline: none;
-      border-color: var(--color-secondary) !important;
-    }
-
-    &:not(:placeholder-shown) {
-      border-color: var(--color-secondary);
+    .card_img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
     }
   }
 
-  // フォーカス時や入力済みのラベルスタイル
-  &__group:has(&__input:focus) &__label,
-  &__group:has(&__input:not(:placeholder-shown)) &__label,
-  &__group:has(&__textarea:focus) &__label,
-  &__group:has(&__textarea:not(:placeholder-shown)) &__label {
-    top: -1.5em;
-    color: var(--color-secondary);
+  &:hover {
+    box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+
+    .card_img {
+      transform: scale(1.2);
+    }
   }
 
-  &__submit-btn {
-    padding: 0.5em 1em;
-    margin: 0 1em;
-    color: var(--color-accent-primary);
-    border: 1px solid var(--color-accent-primary);
-    border-radius: 5px;
-    transition-timing-function: ease;
-    transition-duration: 0.5s;
-    transition-property: color, background-color, border-color;
-
-    &:hover {
-      color: var(--color-primary);
-      background-color: var(--color-accent-primary);
-    }
+  .card_content {
+    margin: 0.5em;
   }
 }
 
-// ハンバーガーメニューアイコン
-.c-hamburger {
-  position: relative;
-  display: none; // PCでは非表示
-  grid-template-columns: repeat(2, 1fr);
-  width: 2em;
-  height: 20px;
-  margin-right: 1em;
-  cursor: pointer;
+/*! ハンバーガーメニュー */
+.humberger {
+  display: none;
 
-  @include b.mq(mobile) {
-    // mobile (spとtab) で表示
-    display: block;
+  @include b.media(sp) {
     padding-top: 0.5em;
+
+    @include b.humberger-common;
   }
 
-  &__bar {
-    position: absolute;
-    display: inline-block;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-accent-primary);
-    transition: all 0.5s ease;
+  @include b.media(tab) {
+    @include b.humberger-common;
+  }
+}
 
-    &:first-child {
-      top: 0;
-      right: 1em;
-    }
+.hum_border {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-color);
+  transition: all 0.5s ease;
 
-    &:nth-child(2) {
-      top: 45%;
-      right: 1em;
-    }
-
-    &:last-child {
-      right: 1em;
-      bottom: 0;
-    }
+  &:first-child {
+    top: 0;
+    right: 1em;
   }
 
-  // openクラスが付与された時のスタイル
-  .is-open & {
-    z-index: 1; // navよりも手前に
+  &:nth-child(2) {
+    top: 45%;
+    right: 1em;
+  }
 
-    .c-hamburger__bar {
+  &:last-child {
+    right: 1em;
+    bottom: 0;
+  }
+}
+
+// ハンバーガーメニュー展開動作
+.open {
+  .humberger {
+    z-index: 1;
+
+    .hum_border {
       &:first-child {
         top: 50%;
         transform: rotate(-225deg);
@@ -184,54 +178,93 @@
       }
     }
   }
+
+  .header_nav {
+    height: 100dvh;
+    transition-delay: 0s;
+
+    .nav_box {
+      right: 0;
+      margin: 0;
+
+      .nav_item {
+        width: 100%;
+        transform: translateX(0);
+
+        .nav_link {
+          width: 100%;
+        }
+
+        @for $i from 1 through 5 {
+          &:nth-child(#{$i}) {
+            transition-delay: 1s + $i * 0.2s;
+          }
+        }
+      }
+    }
+  }
 }
 
-// カードスタイル
-.c-card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+/*! お問い合わせ,予約フォーム */
+form {
   text-align: center;
-  border: solid 1px var(--color-accent-primary);
-  border-radius: 40px;
 
-  @include b.fade-in-animation;
+  .form_box {
+    position: relative;
+    margin-bottom: 2.5em;
+    vertical-align: middle;
 
-  @include b.mq(sp) {
-    flex-basis: 48%; // SPでのカード幅
-  }
+    .wpcf7-form-control-wrap {
+      display: contents;
+    }
 
-  &__title {
-    width: 100%;
-    padding: 1em;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: var(--color-primary);
-    background-color: var(--color-secondary);
-  }
-
-  &__img-box {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-
-    img {
+    .input_box {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
+      padding: 0.5em;
+      border: solid 1px var(--accent-color);
+      border-radius: 5px;
+      transition: border-color 0.5s ease;
+
+      &::placeholder {
+        color: transparent;
+      }
+
+      &:focus {
+        border-color: var(--sub-color) !important;
+      }
+
+      &:not(:placeholder-shown) {
+        border-color: var(--sub-color);
+      }
+    }
+
+    .form_ttl {
+      position: absolute;
+      top: 0.8em;
+      left: 0.9em;
+      display: block;
+      color: var(--accent-color);
+      transition: color 0.5s ease, top 0.5s ease;
+    }
+
+    &:has(.input_box:focus) .form_ttl,
+    &:has(.input_box:not(:placeholder-shown)) .form_ttl {
+      top: -1.5em;
+      color: var(--sub-color);
     }
   }
 
-  &:hover {
-    box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+  .submit_btn {
+    padding: 0.5em 1em;
+    margin: 0 1em;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    transition: color 0.5s ease, background-color 0.5s ease, border-color 0.5s ease;
 
-    .c-card__img {
-      transform: scale(1.2);
+    &:hover {
+      color: var(--main-color);
+      background-color: var(--accent-color);
     }
-  }
-
-  &__content {
-    margin: 0.5em;
   }
 }
