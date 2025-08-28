@@ -4,10 +4,6 @@
 // Base: 変数、Mixin、基本的なスタイル
 // ================================================
 
-// Google Fonts
-@import "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Serif:ital,wdth,wght@0,62.5..100,100..900&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap";
-
-/*! 変数設定 */
 $main-color: #f3f3f3;
 $sub-color: #333;
 $accent-color: #e02121;
@@ -29,9 +25,11 @@ $breakpoints: (
 }
 
 @mixin hidden_animation {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  & {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
 
   &.is-visible {
     opacity: 1;
@@ -39,42 +37,44 @@ $breakpoints: (
   }
 }
 
-// tab,sp共通部分
 @mixin header_common {
-  grid-area: 2 / 1 / 3 / 3;
-  width: 100%;
-  height: 0;
-  background-color: var(--main-color);
-  transition: height 0.8s ease;
-  transition-delay: 1.5s;
+  & {
+    grid-area: 2 / 1 / 3 / 3;
+    width: 100%;
+    height: 0;
+    background-color: var(--main-color);
+    transition: height 0.8s ease;
+    transition-delay: 1.5s;
+  }
 }
 
-// tab,sp共通部分
 @mixin navBox_common {
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 80%;
+  & {
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 80%;
+  }
 }
 
-// tab,sp共通部分
 @mixin navItem_common {
-  width: 100%;
-  transform: translateX(100%);
-  transition: transform 0.8s ease;
+  & {
+    width: 100%;
+    transform: translateX(100%);
+    transition: transform 0.8s ease;
+  }
 }
 
-// ==================================================================
-// ハンバーガーメニュ-
-// ==================================================================
 @mixin humberger-common {
-  position: relative;
-  display: block;
-  grid-template-columns: repeat(2, 1fr);
-  width: 2em;
-  height: 20px;
-  margin-right: 1em;
-  cursor: pointer;
+  & {
+    position: relative;
+    display: block;
+    grid-template-columns: repeat(2, 1fr);
+    width: 2em;
+    height: 20px;
+    margin-right: 1em;
+    cursor: pointer;
+  }
 }
 
 /*! 定数設定 (CSSカスタムプロパティ) */
@@ -105,7 +105,6 @@ a {
   }
 }
 
-/*! ユーティリティ */
 .no-scroll {
   overflow: hidden;
 }
