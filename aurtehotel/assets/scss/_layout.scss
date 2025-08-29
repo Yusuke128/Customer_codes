@@ -42,6 +42,8 @@ header {
 }
 
 .header_nav {
+  grid-area: 1 / 2 / 3 / 3;
+
   @include b.media(tab) {
     @include b.header_common;
   }
@@ -102,6 +104,26 @@ header {
     }
   }
 }
+
+.humberger {
+  display: none;
+
+  @include b.media(sp) {
+    & {
+      padding-top: 0.5em;
+
+      @include b.humberger-common;
+    }
+  }
+
+  @include b.media(tab) {
+    @include b.humberger-common;
+  }
+}
+
+// ==================================================================
+// footer
+// ==================================================================
 
 footer {
   padding-top: 1em;
