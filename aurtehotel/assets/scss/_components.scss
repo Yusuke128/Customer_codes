@@ -89,13 +89,15 @@ a.more_btn {
 
   .card_img_box {
     width: 100%;
-    height: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
     overflow: hidden;
 
     .card_img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: 0 100%;
       transition: transform 0.3s ease;
     }
   }

@@ -74,6 +74,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    font-size: 3rem;
     color: var(--main-color);
     translate: -50% -50%;
   }
@@ -239,7 +240,14 @@
     }
 
     .img_box {
-      margin: 0;
+      flex-basis: 45%;
+      margin: 1rem 0;
+      overflow: hidden;
+
+      img {
+        object-fit: cover;
+        object-position: 0 100%;
+      }
     }
   }
 }
