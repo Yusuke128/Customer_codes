@@ -128,7 +128,7 @@ a.btn:visited,
 }
 
 // 各コンテンツ共通設定
-article,
+article:not(.mv),
 section {
   max-width: 1440px;
   margin-bottom: 3.5rem;
