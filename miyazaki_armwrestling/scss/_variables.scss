@@ -1,0 +1,45 @@
+// ================================================
+// Variables 変数
+// ================================================
+
+$color-primary: #f3f3f3;
+$color-secondary: #0c0c0c;
+$color-accent: #f00;
+$color-accent-secondary: #00f;
+$color-text: #f3f3f3;
+$font-main: "Shippori Mincho", "Noto Sans JP", "Noto Serif JP", "游明朝", serif, "Material Icons";
+$breakpoints: (
+  sp: "screen and (max-width: 767px)",
+  tab: "screen and (min-width : 768px) and (max-width: 1023px)",
+  pc: "screen and (min-width: 1024px)",
+  mobile: "screen and (max-width:1023px)"
+);
+
+// ================================================
+// mixins ミックスイン(共通スタイル)
+// ================================================
+
+// レスポンシブ対応
+@use "sass:map";
+
+@mixin media($breakpoint) {
+  @media #{map.get($breakpoints,$breakpoint)} {
+    @content;
+  }
+}
+
+// テンプレートレイアウト
+// flexbox
+@mixin flex($content: space-between, $align: center) {
+  display: flex;
+  align-items: $align;
+  justify-content: $content;
+}
+
+// 絶対指定で上下中央
+@mixin absolute_center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,181 @@
+@use "bases" as b;
+
+// ==================================================================
+// contents 各レイアウト
+// ==================================================================
+
+// エントリー方法
+.ttl_box {
+  margin-bottom: 1rem;
+
+  &_title {
+    position: relative;
+    display: inline-block;
+    font-size: 3rem;
+
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 25%;
+      content: "";
+      background-color: var(--color-primary);
+    }
+  }
+
+  &_sub {
+    font-size: 1.5em;
+  }
+}
+
+.contentbox {
+  display: inline-block;
+
+  &_txt {
+    @include b.mb2;
+  }
+}
+
+.entryimgbox {
+  @include b.mb2;
+  @include b.flex(space-between, stretch);
+
+  @include b.media(sp) {
+    flex-direction: column;
+    max-width: 90%;
+  }
+
+  &_default,
+  &_checked {
+    flex-basis: 40%;
+  }
+
+  &_previous {
+    position: relative;
+    margin: 0;
+    border-left: dashed 2px var(--color-primary);
+
+    @include b.media(sp) {
+      width: 100%;
+      height: 2px;
+      margin: 3rem 0;
+      border-top: dashed 2px var(--color-primary);
+    }
+
+    &::after {
+      width: 40px;
+      height: 60px;
+      content: "";
+      background-color: var(--color-primary);
+      clip-path: polygon(0 0, 0 100%, 100% 50%);
+
+      @include b.absolute_center;
+
+      @include b.media(sp) {
+        height: 40px;
+        clip-path: polygon(0 0, 100% 0%, 50% 100%);
+      }
+    }
+  }
+}
+
+.previous {
+  position: relative;
+  margin: 3rem 0;
+  border-top: dashed 2px var(--color-primary);
+
+  &::after {
+    width: 40px;
+    height: 60px;
+    content: "";
+    background-color: var(--color-primary);
+    clip-path: polygon(0 0, 100% 0%, 50% 100%);
+
+    @include b.absolute_center;
+
+    @include b.media(sp) {
+      height: 40px;
+    }
+  }
+}
+
+.entry_check {
+  p {
+    @include b.mb2;
+  }
+
+  img {
+    max-width: 70%;
+  }
+}
+
+// エントリーリンク
+#entry_link .contentbox {
+  @include b.mb1;
+}
+
+.tournamentdetails {
+  max-width: 70%;
+  margin-bottom: 1rem;
+  text-align: left;
+
+  @include b.media(sp) {
+    max-width: 100%;
+  }
+
+  &_ttl,
+  &_date,
+  &_class,
+  &_shikaku {
+    margin-bottom: 1.5rem;
+  }
+
+  &_ttl {
+    font-size: 1.75rem;
+  }
+
+  &_date {
+    font-size: 1.5rem;
+  }
+
+  .sec_ttl {
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+  }
+
+  .classlist,
+  .shikaku_list {
+    padding-left: 2rem;
+  }
+
+  .classlist {
+    list-style: disc;
+  }
+}
+
+.entrylink_box {
+  max-width: 70%;
+  text-align: left;
+
+  @include b.media(sp) {
+    max-width: 100%;
+  }
+
+  .entry_list {
+    li {
+      width: 100%;
+      padding-left: 2rem;
+      margin: 1rem 0;
+      border-radius: 0 50px 50px 0;
+      box-shadow: 0 3px 5px 0 rgb(0 0 0 / 35%);
+
+      @include b.flex;
+
+      .btn {
+        margin-right: 0;
+      }
+    }
+  }
+}

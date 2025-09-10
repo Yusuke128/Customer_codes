@@ -1,0 +1,43 @@
+@use "bases" as b;
+
+// ==================================================================
+// header
+// ==================================================================
+header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  padding-top: env(safe-area-inset-top);
+  background-color: #fff;
+
+  @include b.flex;
+}
+
+h1 {
+  flex-basis: 25%;
+
+  img {
+    width: auto;
+    min-height: 100%;
+  }
+}
+
+nav {
+  position: contents;
+
+  .h_nav {
+    font-size: 1.5rem;
+
+    @include b.flex;
+
+    li {
+      margin: 0 2rem;
+
+      @include b.media(sp) {
+        margin: 0 0.5rem;
+        font-size: 1rem;
+      }
+    }
+  }
+}

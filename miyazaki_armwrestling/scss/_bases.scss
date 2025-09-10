@@ -1,0 +1,140 @@
+// ================================================
+// Variables scssで使う変数
+// ================================================
+$breakpoints: (
+  sp: "screen and (max-width: 767px)",
+  tab: "screen and (min-width : 768px) and (max-width: 1023px)",
+  pc: "screen and (min-width: 1024px)",
+  mobile: "screen and (max-width:1023px)"
+);
+
+// ================================================
+// mixins ミックスイン(共通スタイル_プロパティの使い回し)
+// ================================================
+
+// レスポンシブ対応
+@use "sass:map";
+
+@mixin media($breakpoint) {
+  @media #{map.get($breakpoints,$breakpoint)} {
+    @content;
+  }
+}
+
+// テンプレートレイアウト
+// flexbox
+@mixin flex($content: space-between, $align: center) {
+  display: flex;
+  align-items: $align;
+  justify-content: $content;
+}
+
+// 絶対指定で上下中央
+@mixin absolute_center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// 常に下段に余白を
+@mixin mb1 {
+  margin-bottom: 1rem;
+}
+
+@mixin mb2 {
+  margin-bottom: 2rem;
+}
+
+// ================================================
+// Base 全体に影響するもの
+// ================================================
+// カラー変数の定義 -
+:root {
+  --color-primary: #f18d05;
+  --color-secondary: #f3f2e9;
+  --font-color: #000;
+  --font-accent-color: #fff;
+
+  font-family: "Shippori Mincho", "Noto Sans JP", "Noto Serif JP", "游明朝", serif, "Material Icons";
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000;
+
+  @include media("sp") {
+    font-size: 12px;
+    line-height: 1;
+  }
+}
+
+// ================================================
+// Components　共通スタイル(クラスベース)
+// ================================================
+
+// ボタン
+a.btn,
+a.btn:visited,
+.btn {
+  display: inline-block;
+  padding: 0.5em 1em;
+  color: var(--font-accent-color);
+  text-align: center;
+  background-color: var(--color-primary);
+  border: solid 1px transparent;
+  border-radius: 50px;
+  transition: 0.5s ease;
+
+  &:hover {
+    color: var(--color-primary);
+    background-color: var(--font-accent-color);
+    border-color: var(--color-primary);
+  }
+}
+
+// form
+.form {
+  &__box {
+    margin-bottom: 1rem;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+  }
+
+  // WordPress Contact Form7対応
+  .wpcf7-form-control-wrap {
+    display: contents;
+  }
+}
+
+// ハンバーガーオープン時のスクロール制御
+.no-scroll {
+  overflow: hidden;
+}
+
+// 改行処理
+.block {
+  display: block;
+  text-align: center;
+}
+
+// 各コンテンツ共通設定
+article,
+section {
+  max-width: 1440px;
+  margin-bottom: 3.5rem;
+  text-align: center;
+
+  @include media(sp) {
+    width: 90%;
+  }
+}
