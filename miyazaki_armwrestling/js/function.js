@@ -1,3 +1,7 @@
+// スクロール処理(時間指定あり)
+// スクロールさせるボタンを取得
+const scroll_btns = document.querySelectorAll(".nav_link");
+const header = document.querySelector("header");
 // スクロール関数
 const smoothScrollTo = (target, duration) => {
   const startPosition = window.pageYOffset; // 現在のスクロール位置
@@ -32,11 +36,20 @@ const smoothScrollTo = (target, duration) => {
   // アニメーションを開始
   requestAnimationFrame(animationLoop);
 };
-scroll_btn.addEventListener("click", () => {
-  // ヘッダーの高さを取得
-  const header_height = header.getBoundingClientRect().height;
-  // スクロールする高さを計算
-  const scroll_heigh = window.innerHeight - header_height;
-  // スクロール処理
-  smoothScrollTo(scroll_heigh, 1000);
+// アクショントリガー
+scroll_btns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault(); //通常のジャンプていし
+    // hrefから移動先IDを取得
+    const targetId = btn.getAttribute("href");
+    const targetElement = document.querySelector(targetId);
+
+    if (targetElement) {
+      const header_height = header.getBoundingClientRect().height;
+      const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - header_height;
+
+      // スクロール処理開始（1秒）
+      smoothScrollTo(targetPosition, 1000);
+    }
+  });
 });
