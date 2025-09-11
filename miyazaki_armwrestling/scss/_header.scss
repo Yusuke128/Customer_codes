@@ -8,8 +8,10 @@ header {
   top: 0;
   left: 0;
   z-index: 1;
+  width: 100%;
   padding-top: env(safe-area-inset-top);
-  background-color: #fff;
+  background-color: rgb(255 255 255 /50%);
+  backdrop-filter: blur(10px);
 
   @include b.flex;
 }
@@ -20,24 +22,5 @@ h1 {
   img {
     width: auto;
     min-height: 100%;
-  }
-}
-
-nav {
-  position: contents;
-
-  .h_nav {
-    font-size: 1.5rem;
-
-    @include b.flex;
-
-    li {
-      margin: 0 2rem;
-
-      @include b.media(sp) {
-        margin: 0 0.5rem;
-        font-size: 1rem;
-      }
-    }
   }
 }

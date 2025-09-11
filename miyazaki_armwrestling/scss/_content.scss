@@ -3,6 +3,40 @@
 // ==================================================================
 // contents 各レイアウト
 // ==================================================================
+// ナビメニュー
+nav {
+  position: sticky;
+  z-index: 1;
+  padding-bottom: 1rem;
+  background-color: rgb(255 255 255 /50%);
+  backdrop-filter: blur(10px);
+
+  .h_nav {
+    top: 2rem;
+    max-width: 1440px;
+    font-size: 1.5rem;
+
+    @include b.flex(center, center);
+
+    @include b.media(sp) {
+      flex-wrap: wrap;
+      width: 90%;
+    }
+
+    li {
+      padding: 0.5rem;
+      margin: 0 2rem;
+      border: solid 1px var(--color-primary);
+
+      @include b.media(sp) {
+        width: 45%;
+        margin: 1rem 0.5rem;
+        font-size: 1rem;
+        text-align: center;
+      }
+    }
+  }
+}
 
 // エントリー方法
 .ttl_box {
@@ -32,6 +66,14 @@
 
 .contentbox {
   display: inline-block;
+
+  &_ttl {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-primary);
+
+    @include b.mb2;
+  }
 
   &_txt {
     @include b.mb2;
@@ -145,13 +187,26 @@
     font-size: 1.25rem;
   }
 
-  .classlist,
   .shikaku_list {
     padding-left: 2rem;
   }
 
   .classlist {
+    flex-wrap: wrap;
+    padding-left: 1.25rem;
     list-style: disc;
+
+    @include b.flex;
+
+    li {
+      flex-basis: 40%;
+      margin: 0.5rem 0;
+
+      @include b.media(sp) {
+        flex-basis: 46%;
+        margin: 1rem 0;
+      }
+    }
   }
 }
 

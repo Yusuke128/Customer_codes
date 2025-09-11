@@ -1,7 +1,10 @@
-// スクロール処理(時間指定あり)
 // スクロールさせるボタンを取得
 const scroll_btns = document.querySelectorAll(".nav_link");
 const header = document.querySelector("header");
+// ナビメニューの場所を取得
+const nav = document.querySelector("nav");
+
+// スクロール処理(時間指定あり)
 // スクロール関数
 const smoothScrollTo = (target, duration) => {
   const startPosition = window.pageYOffset; // 現在のスクロール位置
@@ -46,10 +49,21 @@ scroll_btns.forEach((btn) => {
 
     if (targetElement) {
       const header_height = header.getBoundingClientRect().height;
-      const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - header_height;
+      const nav_height = nav.getBoundingClientRect().height;
+      const targetPosition =
+        targetElement.getBoundingClientRect().top + window.pageYOffset - header_height - nav_height;
 
       // スクロール処理開始（1秒）
       smoothScrollTo(targetPosition, 1000);
     }
   });
 });
+
+// ナビメニューをヘッダーの下に固定
+
+function Navtop() {
+  const headerHeight = header.offsetHeight;
+  nav.style.top = `${headerHeight}px`;
+}
+window.addEventListener("load", Navtop);
+window.addEventListener("resize", Navtop);
