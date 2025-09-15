@@ -91,36 +91,6 @@ a.btn:visited,
   }
 }
 
-// form
-.form {
-  &__box {
-    margin-bottom: 1rem;
-  }
-
-  &__label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  &__input,
-  &__textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid var(--color-primary);
-    border-radius: 4px;
-  }
-
-  // WordPress Contact Form7対応
-  .wpcf7-form-control-wrap {
-    display: contents;
-  }
-}
-
-// ハンバーガーオープン時のスクロール制御
-.no-scroll {
-  overflow: hidden;
-}
-
 // 改行処理
 .block {
   display: block;
@@ -128,7 +98,7 @@ a.btn:visited,
 }
 
 // 各コンテンツ共通設定
-article,
+article:not(.mv),
 section {
   max-width: 1440px;
   margin-bottom: 3.5rem;
@@ -137,4 +107,24 @@ section {
   @include media(sp) {
     width: 90%;
   }
+}
+
+.pc {
+  display: block;
+
+  @include media(sp) {
+    display: none;
+  }
+}
+
+.sp {
+  display: none;
+
+  @include media(sp) {
+    display: block;
+  }
+}
+
+img:not(.logo) {
+  filter: drop-shadow(2px 2px 5px #000);
 }
