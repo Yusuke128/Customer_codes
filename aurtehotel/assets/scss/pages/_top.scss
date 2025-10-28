@@ -96,6 +96,11 @@
       }
     }
 
+    &:not(:has(#mv)) {
+      max-height: 30rem;
+      object-fit: cover;
+    }
+
     img {
       vertical-align: bottom;
 

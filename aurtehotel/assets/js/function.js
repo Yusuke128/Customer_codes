@@ -72,13 +72,13 @@ scroll_btn.addEventListener("click", () => {
 
 // ふわっと出てくるアニメーション
 // 1. 監視対象の要素をすべて取得
-const animationTargets = document.querySelectorAll(".card_box ,.future");
+const animationTargets = document.querySelectorAll(".card_box ,.feature");
 
 // Intersection Observerのオプション
 const animation_option = {
   root: null,
   rootMargin: "0px 0px -20% 0px", // 画面下から20%見えたら発動
-  threshold: 0,
+  threshold: 0
 };
 
 // Intersection Observerのコールバック関数
