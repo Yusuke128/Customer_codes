@@ -1,0 +1,208 @@
+@use "../base" as b;
+
+// ================================================
+// Pages / Section固有スタイル
+// ================================================
+
+.mv {
+  position: relative;
+
+  @include b.media(sp) {
+    & {
+      height: 100dvh;
+
+      .sp_scroll {
+        position: absolute;
+        bottom: 1em;
+        left: 50%;
+        width: 2em;
+        height: 2em;
+        cursor: pointer;
+        border: 1px solid var(--accent-color);
+        border-radius: 50%;
+        translate: -50%;
+
+        &::before {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 2em;
+          height: 2em;
+          content: "";
+          border-radius: 50%;
+          box-shadow: 0 0 0 0 rgb(253 102 43 / 80%);
+          opacity: 0;
+          translate: -50%;
+          animation: ripple 3s infinite;
+        }
+
+        span {
+          position: absolute;
+          top: 10%;
+          left: 25%;
+          z-index: 2;
+          width: 1em;
+          height: 1em;
+          border-bottom: 1px solid var(--accent-color);
+          border-left: 1px solid var(--accent-color);
+          transform: rotate(-45deg);
+        }
+
+        @keyframes ripple {
+          0% {
+            opacity: 0;
+          }
+
+          30% {
+            opacity: 1;
+          }
+
+          60% {
+            box-shadow: 0 0 0 2em rgb(253 102 43 / 20%);
+            opacity: 0;
+          }
+
+          100% {
+            opacity: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &_ttl {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 3rem;
+    color: var(--main-color);
+    translate: -50% -50%;
+  }
+
+  &_txt {
+    font-size: 4em;
+    font-weight: bold;
+    color: var(--main-color);
+
+    @include b.media(sp) {
+      font-size: 2em;
+    }
+  }
+
+  &_img {
+    @include b.media(sp) {
+      & {
+        height: 100%;
+      }
+    }
+
+    img {
+      vertical-align: bottom;
+
+      @include b.media(sp) {
+        & {
+          width: auto;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
+/*! Concept */
+.concept {
+  display: flex;
+  gap: 1.5em;
+  align-items: stretch;
+  justify-content: space-between;
+  max-width: 1440px;
+
+  @include b.media(sp) {
+    & {
+      position: relative;
+      flex-direction: column;
+      overflow: hidden;
+
+      // background-image: url(../img/webp/concept.webp);
+      // background-position: center;
+      // background-size: cover;
+    }
+  }
+}
+
+.faq {
+  border-bottom: solid 1px var(--sub-color);
+
+  .faq_box {
+    margin: 1em 0;
+
+    summary {
+      font-size: 1.5em;
+      text-decoration: underline;
+
+      @include b.media(sp) {
+        & {
+          font-size: 1.2em;
+        }
+      }
+    }
+
+    .detail_content {
+      width: 80%;
+      margin: 1.2em auto;
+    }
+
+    &[open] .detail_content {
+      animation: fadein 0.5s ease;
+    }
+
+    @keyframes fadein {
+      0% {
+        opacity: 0; /* 透明 */
+        transform: translateY(-10px); /* 上から表示 */
+      }
+
+      100% {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+}
+
+// ==================================================================
+// 予約リンク
+// ==================================================================
+.reserve {
+  &_list {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    text-align: center;
+
+    @include b.media(tab) {
+      @include b.reserveList-common;
+    }
+
+    @include b.media(sp) {
+      @include b.reserveList-common;
+    }
+  }
+
+  &_link {
+    @include b.media(sp) {
+      & {
+        width: 45%;
+      }
+    }
+  }
+
+  &_btn {
+    width: 100%;
+    padding: 0.5em;
+    background-color: var(--accent-color-secondary);
+  }
+}

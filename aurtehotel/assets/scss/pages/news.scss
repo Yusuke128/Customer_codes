@@ -1,0 +1,41 @@
+@use "../base" as b;
+
+// ==================================================================
+// NEWS
+// ==================================================================
+.news {
+  border-bottom: solid 1px var(--sub-color);
+
+  &_list {
+    font-size: 1.5em;
+    text-align: center;
+
+    @include b.media(sp) {
+      & {
+        font-size: 1em;
+      }
+    }
+  }
+
+  &_item {
+    margin-bottom: 0.5em;
+
+    .news_link {
+      border-bottom: 1px solid #000;
+
+      &:visited {
+        color: transparent;
+      }
+    }
+
+    .date {
+      margin-right: 1.5em;
+      font-style: italic;
+    }
+  }
+}
+
+/*! NEWS詳細 */
+.news_content {
+  margin-bottom: 2em;
+}

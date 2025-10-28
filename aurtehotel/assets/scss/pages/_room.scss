@@ -1,0 +1,135 @@
+@use "../base" as b;
+
+/*! 部屋詳細(single-room) */
+.room_list {
+  display: flex;
+  justify-content: center;
+
+  @include b.media(sp) {
+    & {
+      flex-wrap: wrap;
+      gap: 0.5em;
+    }
+  }
+
+  .list_item {
+    flex-basis: 99%;
+    padding: 0.5em;
+    text-align: center;
+    background-color: var(--accent-color-secondary);
+    border: 1px solid var(--accent-color);
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.5s;
+    transition-property: box-shadow, background-color;
+
+    @include b.media(sp) {
+      & {
+        flex-basis: 45%;
+        width: 100%;
+        color: var(--main-color);
+      }
+    }
+
+    &:hover {
+      color: var(--sub-color);
+      background-color: var(--accent-color);
+      border-color: var(--sub-color);
+    }
+  }
+}
+
+.features {
+  margin-top: 2em;
+
+  .feature {
+    @include b.media(sp) {
+      & {
+        padding: 1.5em 0;
+      }
+
+      .wrapper {
+        flex-direction: column;
+      }
+
+      .section_ttl {
+        text-align: center;
+      }
+    }
+
+    @include b.hidden_animation;
+
+    .wrapper {
+      display: flex;
+      gap: 1.5em;
+      align-items: center;
+      justify-content: space-between;
+
+      @include b.media(sp) {
+        & {
+          flex-direction: column;
+        }
+      }
+    }
+
+    &:nth-child(2n) {
+      color: var(--main-color);
+      background-color: var(--sub-color);
+
+      .wrapper {
+        flex-direction: row-reverse;
+
+        @include b.media(sp) {
+          & {
+            flex-direction: column;
+          }
+        }
+      }
+    }
+
+    .txt_box {
+      flex-basis: 45%;
+
+      .section_ttl {
+        margin-bottom: 1.5em;
+      }
+    }
+
+    .img_box {
+      flex-basis: 45%;
+      margin: 1rem 0;
+      overflow: hidden;
+
+      img {
+        object-fit: cover;
+        object-position: 0 100%;
+      }
+    }
+  }
+}
+
+.facilities_box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: auto;
+  gap: 1.5em;
+  margin-top: 1.5em !important;
+
+  @include b.media(tab) {
+    & {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @include b.media(sp) {
+    & {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .facility_box {
+    width: 100%;
+    padding: 1.5em 1em;
+    text-align: center;
+    border: solid 1px var(--sub-color);
+  }
+}
