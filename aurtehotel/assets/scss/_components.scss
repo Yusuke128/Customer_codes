@@ -65,7 +65,7 @@ a.more_btn {
 }
 
 .card {
-  &__box {
+  &_box {
     display: flex;
     flex-basis: 23%;
     flex-direction: column;
@@ -80,7 +80,7 @@ a.more_btn {
     }
   }
 
-  &__ttl {
+  &_ttl {
     width: 100%;
     padding: 1em;
     font-size: 1.5em;
