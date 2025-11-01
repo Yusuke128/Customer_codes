@@ -95,21 +95,21 @@
         height: 100%;
       }
     }
+  }
 
-    &:not(:has(#top)) img {
-      max-height: 30rem;
-      object-fit: cover;
-    }
+  &:not(:has(#top)) img {
+    max-height: 30rem;
+    object-fit: cover;
+  }
 
-    img {
-      vertical-align: bottom;
+  img {
+    vertical-align: bottom;
 
-      @include b.media(sp) {
-        & {
-          width: auto;
-          height: 100%;
-          object-fit: cover;
-        }
+    @include b.media(sp) {
+      & {
+        width: auto;
+        height: 100%;
+        object-fit: cover;
       }
     }
   }
