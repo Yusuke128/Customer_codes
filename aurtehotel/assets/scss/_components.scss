@@ -64,21 +64,23 @@ a.more_btn {
   }
 }
 
-.card_box {
-  display: flex;
-  flex-basis: 23%;
-  flex-direction: column;
-  overflow: hidden;
-  border: solid 1px var(--accent-color);
-  border-radius: 40px;
+.card {
+  &__box {
+    display: flex;
+    flex-basis: 23%;
+    flex-direction: column;
+    overflow: hidden;
+    border: solid 1px var(--accent-color);
+    border-radius: 40px;
 
-  @include b.hidden_animation;
+    @include b.hidden_animation;
 
-  @include b.media(sp) {
-    flex-basis: 48%;
+    @include b.media(sp) {
+      flex-basis: 48%;
+    }
   }
 
-  .card_ttl {
+  &__ttl {
     width: 100%;
     padding: 1em;
     font-size: 1.5em;
@@ -87,7 +89,7 @@ a.more_btn {
     background-color: var(--sub-color);
   }
 
-  .card_img_box {
+  &_img_box {
     width: 100%;
     height: auto;
     aspect-ratio: 1/1;
@@ -109,10 +111,10 @@ a.more_btn {
       transform: scale(1.1);
     }
   }
-}
 
-.card_content {
-  margin: 0.5em;
+  &_content {
+    margin: 0.5em;
+  }
 }
 
 // ==================================================================
@@ -185,5 +187,65 @@ form {
       color: var(--main-color);
       background-color: var(--accent-color);
     }
+  }
+}
+
+// ===================
+// ページトップへのスクロール
+// ===================
+.scroll_top {
+  position: fixed;
+  right: 30%;
+  bottom: 1em;
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+  border: 1px solid var(--accent-color);
+  border-radius: 50%;
+  translate: -50%;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2em;
+    height: 2em;
+    content: "";
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgb(253 102 43 / 80%);
+    opacity: 0;
+    translate: -50%;
+    animation: ripple 3s infinite;
+  }
+
+  span {
+    position: absolute;
+    top: 10%;
+    left: 25%;
+    z-index: 2;
+    width: 1em;
+    height: 1em;
+    border-bottom: 1px solid var(--accent-color);
+    border-left: 1px solid var(--accent-color);
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  60% {
+    box-shadow: 0 0 0 2em rgb(253 102 43 / 20%);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
