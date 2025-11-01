@@ -9,7 +9,10 @@ $main-color: #f5f6fa; // 柔らかい白。背景やベースに最適
 $sub-color: #333; // テキストやアイコンのメインカラー
 $accent-color: #e02121; // コントラスト強めの赤（CTA・リンク）
 $accent-color-secondary: #5b6ff3; // ブルー系補助色（hoverなど）
-
+$bg-color-main: rgba(
+  $color: #f5f6fa,
+  $alpha: 60%
+);
 $font-family: "Shippori Mincho", "Noto Sans JP", "Noto Serif JP", "游明朝", serif, "Material Icons";
 $font-size: 16px;
 $line-height: 1.5;
@@ -139,6 +142,7 @@ $breakpoints: (
   --sub-color: #{$sub-color};
   --accent-color: #{$accent-color};
   --accent-color-secondary: #{$accent-color-secondary};
+  --bg-color-main:${$bg-color-main};
 }
 
 [data-theme="dark"] {
