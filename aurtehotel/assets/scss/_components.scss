@@ -195,28 +195,13 @@ form {
 // ===================
 .scroll_top {
   position: fixed;
-  right: 30%;
-  bottom: 1em;
+  right: 10%;
+  bottom: 30%;
   width: 2em;
   height: 2em;
   cursor: pointer;
   border: 1px solid var(--accent-color);
   border-radius: 50%;
-  translate: -50%;
-
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 2em;
-    height: 2em;
-    content: "";
-    border-radius: 50%;
-    box-shadow: 0 0 0 0 rgb(253 102 43 / 80%);
-    opacity: 0;
-    translate: -50%;
-    animation: ripple 3s infinite;
-  }
 
   span {
     position: absolute;
@@ -227,7 +212,8 @@ form {
     height: 1em;
     border-bottom: 1px solid var(--accent-color);
     border-left: 1px solid var(--accent-color);
-    transform: rotate(-45deg);
+    transform: rotate(135deg);
+    translate: -50% -25%;
   }
 }
 
