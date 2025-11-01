@@ -97,8 +97,8 @@
     }
   }
 
-  &:not(:has(#top)) img {
-    max-height: 30rem;
+  &:not(.front-page) img {
+    height: 30rem;
     object-fit: cover;
   }
 
