@@ -4,16 +4,19 @@
 // Base: 変数、Mixin、基本的なスタイル
 // ================================================
 
-$main-color: #f3f3f3;
-$sub-color: #333;
-$accent-color: #e02121;
-$accent-color-secondary: #5b6ff3a5;
+// Light Theme
+$main-color: #f5f6fa; // 柔らかい白。背景やベースに最適
+$sub-color: #333; // テキストやアイコンのメインカラー
+$accent-color: #e02121; // コントラスト強めの赤（CTA・リンク）
+$accent-color-secondary: #5b6ff3; // ブルー系補助色（hoverなど）
+
 $font-family: "Shippori Mincho", "Noto Sans JP", "Noto Serif JP", "游明朝", serif, "Material Icons";
 $font-size: 16px;
 $line-height: 1.5;
 $breakpoints: (
   sp: "screen and (max-width: 767px)",
   tab: "screen and (min-width : 768px) and (max-width: 1023px)",
+  mobile: "screen and (max-width:1023px)",
   pc: "screen and (min-width: 1024px)"
 );
 
@@ -37,35 +40,7 @@ $breakpoints: (
   }
 }
 
-@mixin header_common {
-  & {
-    grid-area: 2 / 1 / 3 / 3;
-    width: 100%;
-    height: 0;
-    background-color: var(--main-color);
-    transition: height 0.8s ease;
-    transition-delay: 1.5s;
-  }
-}
-
-@mixin navBox_common {
-  & {
-    flex-direction: column;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 80%;
-  }
-}
-
-@mixin navItem_common {
-  & {
-    width: 100%;
-    transform: translateX(100%);
-    transition: transform 0.8s ease;
-  }
-}
-
-@mixin humberger-common {
+%humberger-common {
   & {
     position: relative;
     display: block;
@@ -166,11 +141,20 @@ $breakpoints: (
   --accent-color-secondary: #{$accent-color-secondary};
 }
 
+[data-theme="dark"] {
+  // Dark Theme
+  --main-color: #1c1d22; // 背景。完全な黒ではなく少し青みのあるグレー
+  --sub-color: #f5f6fa; // テキスト（ライトテーマの背景色をそのまま転用）
+  --accent-color: #ff6b6b; // 明度を上げた赤で見やすく
+  --accent-color-secondary: #8fa3ff; // 明るめの青でhoverや装飾に最適
+}
+
 /*! 基本スタイル */
 body {
   font-family: var(--font-family);
   font-size: var(--font-size);
   line-height: var(--line-height);
+  color: var(--main-color);
 }
 
 a {

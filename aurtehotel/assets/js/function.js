@@ -1,3 +1,11 @@
+// テーマカラーの切り替え(OS依存)
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+if (prefersDark) {
+  document.body.dataset.theme = "dark";
+} else {
+  document.body.dataset.theme = "light";
+}
+
 //ハンバーガーメニュー
 const hum = document.querySelector(".humberger");
 const header = document.querySelector("header");
@@ -100,4 +108,37 @@ const animationObserver = new IntersectionObserver(animationCallback, animation_
 // 各監視対象要素をObserverに登録
 animationTargets.forEach((target) => {
   animationObserver.observe(target);
+});
+
+// ===================
+// ページトップへ戻るボタン
+// ===================
+const scrollTopBtn = document.getElementById("scroll_top");
+const footer = document.querySelector("footer");
+
+// スクロール位置に応じて表示・非表示を切り替え
+window.addEventListener("scroll", () => {
+  const scrollY = window.scrollY;
+  const windowH = window.innerHeight;
+  const footerTop = footer.getBoundingClientRect().top + scrollY;
+
+  // スクロール量が200pxを超えたら表示
+  if (scrollY > 300) {
+    scrollTopBtn.classList.add("is-visible");
+  } else {
+    scrollTopBtn.classList.remove("is-visible");
+  }
+
+  // フッターに重ならないように調整
+  const footerOverlap = scrollY + windowH - footerTop;
+  if (footerOverlap > 0) {
+    scrollTopBtn.style.bottom = `${footerOverlap + 20}px`; // 20pxの余白
+  } else {
+    scrollTopBtn.style.bottom = "5%";
+  }
+});
+
+// スムーススクロール（既存smoothScrollTo関数を再利用）
+scrollTopBtn.addEventListener("click", () => {
+  smoothScrollTo(0, 1000);
 });

@@ -12,7 +12,7 @@
 a.more_btn {
   display: inline-block;
   padding: 0.5em 0.75em;
-  color: var(--sub-color);
+  color: var(--main-color);
   text-align: right;
   background-color: var(--accent-color);
   border: solid 1px var(--sub-color);
@@ -190,23 +190,37 @@ form {
   }
 }
 
-// ===================
-// ページトップへのスクロール
-// ===================
 .scroll_top {
   position: fixed;
   right: 10%;
   bottom: 30%;
-  width: 2em;
-  height: 2em;
+  visibility: hidden;
+  width: 2.5em;
+  height: 2.5em;
   cursor: pointer;
+  background-color: rgb(var(--accent-rgb) / 5%);
   border: 1px solid var(--accent-color);
   border-radius: 50%;
+  opacity: 0;
+  backdrop-filter: blur(4px);
+  transition: all 0.4s ease, transform 0.3s ease;
+
+  &.is-visible {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &:hover {
+    background-color: rgb(var(--accent-rgb) / 15%);
+    transform: translateY(-3px);
+    animation: toptop-hover 1.2s ease-out;
+  }
 
   span {
     position: absolute;
-    top: 10%;
-    left: 25%;
+    top: 50%;
+    left: 50%;
     z-index: 2;
     width: 1em;
     height: 1em;
@@ -214,6 +228,16 @@ form {
     border-left: 1px solid var(--accent-color);
     transform: rotate(135deg);
     translate: -50% -25%;
+  }
+}
+
+@keyframes totop-hover {
+  0% {
+    box-shadow: 0 0 0 0 rgb(var(--accent-rgb) / 25%);
+  }
+
+  100% {
+    box-shadow: 0 0 0 1.5em rgb(var(--accent-rgb) / 0%);
   }
 }
 
