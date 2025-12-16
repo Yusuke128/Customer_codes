@@ -124,12 +124,12 @@ header {
     & {
       padding-top: 0.5em;
 
-      @include %humberger-common;
+      @extend %humberger-common;
     }
   }
 
   @include b.media(tab) {
-    @include %humberger-common;
+    @extend %humberger-common;
   }
 }
 
