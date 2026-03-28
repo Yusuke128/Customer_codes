@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 
 // ================================================
 // Base: 変数、Mixin、基本的なスタイル
@@ -13,14 +13,14 @@ $bg-color-main: rgba(
   $color: #f5f6fa,
   $alpha: 60%
 );
-$font-family: "Shippori Mincho", "Noto Sans JP", "Noto Serif JP", "游明朝", serif, "Material Icons";
+$font-family: 'Shippori Mincho', 'Noto Sans JP', 'Noto Serif JP', '游明朝', serif, 'Material Icons';
 $font-size: 16px;
 $line-height: 1.5;
 $breakpoints: (
-  sp: "screen and (max-width: 767px)",
-  tab: "screen and (min-width : 768px) and (max-width: 1023px)",
-  mobile: "screen and (max-width:1023px)",
-  pc: "screen and (min-width: 1024px)"
+  sp: 'screen and (max-width: 767px)',
+  tab: 'screen and (min-width : 768px) and (max-width: 1023px)',
+  mobile: 'screen and (max-width:1023px)',
+  pc: 'screen and (min-width: 1024px)'
 );
 
 /*! Mixin設定 */
@@ -34,7 +34,9 @@ $breakpoints: (
   & {
     opacity: 0;
     transform: translateY(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition:
+      opacity 0.8s ease,
+      transform 0.8s ease;
   }
 
   &.is-visible {
@@ -43,7 +45,7 @@ $breakpoints: (
   }
 }
 
-%humberger-common {
+@mixin humberger-common {
   & {
     position: relative;
     display: block;
@@ -142,10 +144,10 @@ $breakpoints: (
   --sub-color: #{$sub-color};
   --accent-color: #{$accent-color};
   --accent-color-secondary: #{$accent-color-secondary};
-  --bg-color-main:${$bg-color-main};
+  --bg-color-main: ${#{$bg-color-main}};
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   // Dark Theme
   --main-color: #1c1d22; // 背景。完全な黒ではなく少し青みのあるグレー
   --sub-color: #f5f6fa; // テキスト（ライトテーマの背景色をそのまま転用）
